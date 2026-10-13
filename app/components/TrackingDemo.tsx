@@ -25,7 +25,7 @@ export function TrackingDemo() {
       const aircraftX = 162;
       const aircraftY = 62;
       const targetX = mode === "ground" ? 675 : 560;
-      const targetY = mode === "ground" ? 306 : 166;
+      const targetY = mode === "ground" ? 306 : 100;
       const pivotY = aircraftY + 42;
       const angle = -Math.atan2(targetX - aircraftX, targetY - pivotY);
 
@@ -34,8 +34,8 @@ export function TrackingDemo() {
       airTarget.setAttribute("transform", `translate(${targetX} ${targetY})`);
       lockRing.setAttribute("transform", `translate(${targetX} ${targetY})`);
       eye.setAttribute("transform", `rotate(${angle * 180 / Math.PI} 0 42)`);
-      beam.setAttribute("x1", String(aircraftX - Math.sin(angle) * 4));
-      beam.setAttribute("y1", String(pivotY + Math.cos(angle) * 4));
+      beam.setAttribute("x1", String(aircraftX - Math.sin(angle) * 6));
+      beam.setAttribute("y1", String(pivotY + Math.cos(angle) * 6));
       beam.setAttribute("x2", String(targetX));
       beam.setAttribute("y2", String(targetY));
       return;
@@ -54,13 +54,13 @@ export function TrackingDemo() {
         const targetX = mode === "ground"
           ? 675 + Math.sin(seconds * 0.72) * 95
           : 560 + Math.sin(seconds * 0.72) * 70;
-        const targetY = mode === "ground" ? 306 : 166 + Math.sin(seconds * 0.62) * 25;
+        const targetY = mode === "ground" ? 306 : 100 + Math.sin(seconds * 0.62) * 10;
 
-        // The camera's pivot is fixed to the drone's underside; only its pan angle changes.
+        // The camera housing stays level; only the internal optical eye turns toward the target.
         const pivotY = aircraftY + 42;
         const angle = -Math.atan2(targetX - aircraftX, targetY - pivotY);
-        const lensX = aircraftX - Math.sin(angle) * 4;
-        const lensY = pivotY + Math.cos(angle) * 4;
+        const lensX = aircraftX - Math.sin(angle) * 6;
+        const lensY = pivotY + Math.cos(angle) * 6;
 
         aircraft.setAttribute("transform", `translate(${aircraftX} ${aircraftY})`);
         groundTarget.setAttribute("transform", `translate(${targetX} 306)`);
@@ -137,7 +137,7 @@ export function TrackingDemo() {
             <path d="M0 265 Q160 245 320 268 T640 260 T900 270 V380 H0Z" fill="#dce8d4" />
             <path d="M0 294 Q175 280 330 295 T670 288 T900 298" stroke="#c1d4b7" strokeWidth="2" fill="none" />
 
-            <line data-beam x1="165.7" y1="101.5" x2="675" y2="306" stroke="#a32638" strokeWidth="2" strokeDasharray="8 7" />
+            <line data-beam x1="167.5" y1="105.2" x2="675" y2="306" stroke="#a32638" strokeWidth="2" strokeDasharray="8 7" />
             <g data-lock-ring transform="translate(675 306)">
               <circle r="35" fill="none" stroke="#0aa5a0" strokeOpacity=".32" />
               <circle r="57" fill="none" stroke="#0aa5a0" strokeOpacity=".16" />
@@ -155,13 +155,13 @@ export function TrackingDemo() {
               <circle cx="0" cy="30" r="6" fill="#0aa5a0" stroke="#fff" strokeWidth="3" />
               <g data-gimbal>
                 <rect x="-26" y="28" width="52" height="28" rx="9" fill="#e8edf3" stroke="#71869b" strokeWidth="3" />
-                <circle cx="0" cy="42" r="10" fill="#a32638" />
-                <circle cx="0" cy="42" r="7" fill="#0d1b2a" />
+                <circle cx="0" cy="42" r="11" fill="#a32638" />
+                <circle cx="0" cy="42" r="8" fill="#0d1b2a" />
                 <circle cx="0" cy="42" r="18" fill="none" stroke="#0aa5a0" strokeOpacity=".6" />
                 <g data-eye transform="rotate(-68 0 42)">
-                  <path d="M0 42V46" stroke="#0aa5a0" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="0" cy="46" r="3" fill="#0aa5a0" />
-                  <circle cx="-1" cy="45" r="1" fill="#e7eef6" />
+                  <path d="M0 42V48" stroke="#0aa5a0" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="0" cy="48" r="3.5 fill="#0aa5a0" />
+                  <circle cx="-1" cy="47" r="1 fill="#e7eef6" />
                 </g>
               </g>
             </g>
