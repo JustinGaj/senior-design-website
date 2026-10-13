@@ -81,6 +81,15 @@ export function ProjectTabs({ tabs }: { tabs: ProjectTab[] }) {
         >
           {activeTab.content}
         </section>
+        {tabs.filter((tab) => tab.id !== activeTab.id).map((tab) => (
+          <section
+            key={tab.id}
+            id={`panel-${tab.id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${tab.id}`}
+            hidden
+          />
+        ))}
       </main>
     </>
   );
