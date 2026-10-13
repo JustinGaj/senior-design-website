@@ -20,7 +20,7 @@ const concepts = [
 const rows = [
   ["Target detection range", "1.5 mi", "1 mi"],
   ["Gimbal mass", "< 3 lb", "3 lb"],
-  ["Average power", "25 W", "30 W"],
+  ["Gimbal draw", "30 W", "45 W"],
   ["Camera frame rate", "≥ 20 fps", "20 fps"],
   ["IMU sample rate", "≥ 500 Hz", "500 Hz"],
   ["End-to-end latency", "< 100 ms", "100 ms"],
