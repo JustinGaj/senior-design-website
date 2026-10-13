@@ -160,8 +160,8 @@ export function TrackingDemo() {
                 <circle cx="0" cy="42" r="18" fill="none" stroke="#0aa5a0" strokeOpacity=".6" />
                 <g data-eye transform="rotate(-68 0 42)">
                   <path d="M0 42V48" stroke="#0aa5a0" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="0" cy="48" r="3.5 fill="#0aa5a0" />
-                  <circle cx="-1" cy="47" r="1 fill="#e7eef6" />
+                  <circle cx="0" cy="48" r="3.5" fill="#0aa5a0" />
+                  <circle cx="-1" cy="47" r="1" fill="#e7eef6" />
                 </g>
               </g>
             </g>
