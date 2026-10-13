@@ -16,7 +16,9 @@ export function TrackingDemo() {
     const groundTarget = svg.querySelector<SVGGElement>("[data-ground-target]");
     const airTarget = svg.querySelector<SVGGElement>("[data-air-target]");
     const beam = svg.querySelector<SVGLineElement>("[data-beam]");
-    if (!aircraft || !groundTarget || !airTarget || !beam) return;
+    const gimbal = svg.querySelector<SVGGElement>("[data-gimbal]");
+    const lockRing = svg.querySelector<SVGGElement>("[data-lock-ring]");
+    if (!aircraft || !groundTarget || !airTarget || !beam || !gimbal || !lockRing) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) return;
@@ -33,12 +35,17 @@ export function TrackingDemo() {
         const aircraftY = 62 + Math.sin(seconds * 1.2) * 4;
         const targetX = 675 + Math.sin(seconds * 0.72) * 95;
         const targetY = mode === "ground" ? 306 : 166 + Math.sin(seconds * 0.62) * 25;
+        const angle = -Math.atan2(targetX - aircraftX, targetY - (aircraftY + 20));
+        const lensX = aircraftX - Math.sin(angle) * 72;
+        const lensY = aircraftY + 20 + Math.cos(angle) * 72;
 
         aircraft.setAttribute("transform", `translate(${aircraftX} ${aircraftY})`);
         groundTarget.setAttribute("transform", `translate(${targetX} 306)`);
         airTarget.setAttribute("transform", `translate(${targetX} ${targetY})`);
-        beam.setAttribute("x1", String(aircraftX));
-        beam.setAttribute("y1", String(aircraftY + 112));
+        lockRing.setAttribute("transform", `translate(${targetX} ${targetY})`);
+        gimbal.setAttribute("transform", `rotate(${angle * 180 / Math.PI} 0 20)`);
+        beam.setAttribute("x1", String(lensX));
+        beam.setAttribute("y1", String(lensY));
         beam.setAttribute("x2", String(targetX));
         beam.setAttribute("y2", String(targetY));
         beam.setAttribute("stroke-dashoffset", String((time / 30) % 22));
@@ -107,9 +114,11 @@ export function TrackingDemo() {
             <path d="M0 265 Q160 245 320 268 T640 260 T900 270 V380 H0Z" fill="#dce8d4" />
             <path d="M0 294 Q175 280 330 295 T670 288 T900 298" stroke="#c1d4b7" strokeWidth="2" fill="none" />
 
-            <line data-beam x1="162" y1="174" x2="675" y2="306" stroke="#a32638" strokeWidth="2" strokeDasharray="8 7" />
-            <circle cx="675" cy="306" r="35" fill="none" stroke="#0aa5a0" strokeOpacity=".32" />
-            <circle cx="675" cy="306" r="57" fill="none" stroke="#0aa5a0" strokeOpacity=".16" />
+            <line data-beam x1="162" y1="154" x2="675" y2="306" stroke="#a32638" strokeWidth="2" strokeDasharray="8 7" />
+            <g data-lock-ring transform="translate(675 306)">
+              <circle r="35" fill="none" stroke="#0aa5a0" strokeOpacity=".32" />
+              <circle r="57" fill="none" stroke="#0aa5a0" strokeOpacity=".16" />
+            </g>
 
             <g data-aircraft transform="translate(162 62)">
               <path d="M-72 6H72" stroke="#0d1b2a" strokeWidth="8" strokeLinecap="round" />
@@ -117,10 +126,12 @@ export function TrackingDemo() {
               <path d="M-88 -15H-49M49 -15H88" stroke="#0aa5a0" strokeWidth="5" strokeLinecap="round" />
               <rect x="-24" y="-8" width="48" height="28" rx="11" fill="#16293f" />
               <path d="M0 20V79" stroke="#71869b" strokeWidth="6" />
-              <rect x="-28" y="72" width="56" height="40" rx="13" fill="#e8edf3" stroke="#71869b" strokeWidth="3" />
-              <circle cx="0" cy="92" r="12" fill="#a32638" />
-              <circle cx="0" cy="92" r="5" fill="#0d1b2a" />
-              <circle cx="0" cy="92" r="24" fill="none" stroke="#0aa5a0" strokeOpacity=".6" />
+              <g data-gimbal>
+                <rect x="-28" y="72" width="56" height="40" rx="13" fill="#e8edf3" stroke="#71869b" strokeWidth="3" />
+                <circle cx="0" cy="92" r="12" fill="#a32638" />
+                <circle cx="0" cy="92" r="5" fill="#0d1b2a" />
+                <circle cx="0" cy="92" r="24" fill="none" stroke="#0aa5a0" strokeOpacity=".6" />
+              </g>
             </g>
 
             <g data-ground-target transform="translate(675 306)" style={{ display: mode === "ground" ? "block" : "none" }}>
