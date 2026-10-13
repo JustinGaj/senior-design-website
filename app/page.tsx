@@ -144,14 +144,14 @@ const tabs: ProjectTab[] = [
                       <rect x="288" y="161" width="104" height="32" rx="12" fill="#16293F" stroke="#71869B" />
                       <rect x="309" y="191" width="13" height="12" rx="4" fill="#27313C" />
                       <rect x="358" y="191" width="13" height="12" rx="4" fill="#27313C" />
-                      <rect x="295" y="201" width="90" height="8" rx="4" fill="#AAB9C8" />
-                      <rect x="280" y="209" width="120" height="67" rx="19" fill="#E9EDF2" />
-                      <rect x="292" y="217" width="96" height="51" rx="14" fill="#16293F" />
-                      <circle cx="340" cy="242" r="20" fill="url(#lens)" />
-                      <circle cx="340" cy="242" r="10" fill="#0D1B2A" />
-                      <circle cx="336" cy="238" r="4" fill="#DCE8F2" />
-                      <path d="M280 220h-14v42h14M400 220h14v42h-14" stroke="#0AA5A0" strokeWidth="5" />
-                      <path d="M340 279v102" stroke="#FF7B8C" strokeDasharray="5 7" />
+                      <rect x="295" y="199" width="90" height="6" rx="3" fill="#AAB9C8" />
+                      <rect x="280" y="205" width="120" height="55" rx="16" fill="#E9EDF2" />
+                      <rect x="292" y="211" width="96" height="43" rx="12" fill="#16293F" />
+                      <circle cx="340" cy="232" r="17" fill="url(#lens)" />
+                      <circle cx="340" cy="232" r="9" fill="#0D1B2A" />
+                      <circle cx="336" cy="228" r="4" fill="#DCE8F2" />
+                      <path d="M280 214h-14v37h14M400 214h14v37h-14" stroke="#0AA5A0" strokeWidth="5" />
+                      <path d="M340 263v118" stroke="#FF7B8C" strokeDasharray="5 7" />
                       <circle cx="340" cy="398" r="12" fill="#FF7B8C" />
                       <circle cx="340" cy="398" r="28" stroke="#FF7B8C" strokeOpacity=".5" />
                       <rect x="34" y="30" width="206" height="34" rx="17" fill="#0D1B2A" fillOpacity=".82" stroke="white" strokeOpacity=".16" />
@@ -161,7 +161,7 @@ const tabs: ProjectTab[] = [
                       <rect x="34" y="220" width="174" height="58" rx="12" fill="#0D1B2A" fillOpacity=".86" stroke="white" strokeOpacity=".14" />
                       <text x="48" y="241" fill="#9FB0C4" fontFamily="monospace" fontSize="9">VIBRATION ISOLATION</text>
                       <text x="48" y="259" fill="white" fontFamily="monospace" fontSize="11">Rubber dampeners</text>
-                      <path d="M405 251l71 104" stroke="#0AA5A0" strokeDasharray="5 5" />
+                      <path d="M398 237l78 118" stroke="#0AA5A0" strokeDasharray="5 5" />
                       <rect x="476" y="355" width="174" height="76" rx="12" fill="#0D1B2A" fillOpacity=".84" stroke="white" strokeOpacity=".12" />
                       <text x="490" y="374" fill="#9FB0C4" fontFamily="monospace" fontSize="8">PAYLOAD · 2-AXIS GIMBAL</text>
                       <text x="490" y="394" fill="white" fontFamily="monospace" fontSize="10">JETSON ORIN NANO</text>
