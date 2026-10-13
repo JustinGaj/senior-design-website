@@ -37,16 +37,16 @@ export function TrackingDemo() {
         const targetY = mode === "ground" ? 306 : 166 + Math.sin(seconds * 0.62) * 25;
 
         // The camera's pivot is fixed to the drone's underside; only its pan angle changes.
-        const pivotY = aircraftY + 38;
+        const pivotY = aircraftY + 30;
         const angle = -Math.atan2(targetX - aircraftX, targetY - pivotY);
-        const lensX = aircraftX - Math.sin(angle) * 13;
-        const lensY = pivotY + Math.cos(angle) * 13;
+        const lensX = aircraftX - Math.sin(angle) * 12;
+        const lensY = pivotY + Math.cos(angle) * 12;
 
         aircraft.setAttribute("transform", `translate(${aircraftX} ${aircraftY})`);
         groundTarget.setAttribute("transform", `translate(${targetX} 306)`);
         airTarget.setAttribute("transform", `translate(${targetX} ${targetY})`);
         lockRing.setAttribute("transform", `translate(${targetX} ${targetY})`);
-        gimbal.setAttribute("transform", `rotate(${angle * 180 / Math.PI} 0 38)`);
+        gimbal.setAttribute("transform", `rotate(${angle * 180 / Math.PI} 0 30)`);
         beam.setAttribute("x1", String(lensX));
         beam.setAttribute("y1", String(lensY));
         beam.setAttribute("x2", String(targetX));
@@ -128,16 +128,16 @@ export function TrackingDemo() {
               <path d="M-47 5L-69 -14M47 5L69 -14" stroke="#0d1b2a" strokeWidth="6" strokeLinecap="round" />
               <path d="M-88 -15H-49M49 -15H88" stroke="#0aa5a0" strokeWidth="5" strokeLinecap="round" />
               <rect x="-24" y="-8" width="48" height="28" rx="11" fill="#16293f" />
-              <path d="M0 20V38" stroke="#71869b" strokeWidth="4" />
-              <rect x="-17" y="20" width="9" height="8" rx="3" fill="#27313c" />
-              <rect x="8" y="20" width="9" height="8" rx="3" fill="#27313c" />
-              <rect x="-21" y="28" width="42" height="5" rx="2" fill="#aab9c8" />
-              <circle cx="0" cy="38" r="7" fill="#0aa5a0" stroke="#fff" strokeWidth="3" />
-              <g data-gimbal transform="rotate(0 0 38)">
-                <rect x="-28" y="34" width="56" height="38" rx="12" fill="#e8edf3" stroke="#71869b" strokeWidth="3" />
-                <circle cx="0" cy="51" r="12" fill="#a32638" />
-                <circle cx="0" cy="51" r="5" fill="#0d1b2a" />
-                <circle cx="0" cy="51" r="24" fill="none" stroke="#0aa5a0" strokeOpacity=".6" />
+              <path d="M0 20V30" stroke="#71869b" strokeWidth="4" />
+              <rect x="-17" y="20" width="9" height="6" rx="3" fill="#27313c" />
+              <rect x="8" y="20" width="9" height="6" rx="3" fill="#27313c" />
+              <rect x="-21" y="26" width="42" height="4" rx="2" fill="#aab9c8" />
+              <circle cx="0" cy="30" r="6" fill="#0aa5a0" stroke="#fff" strokeWidth="3" />
+              <g data-gimbal transform="rotate(0 0 30)">
+                <rect x="-26" y="28" width="52" height="28" rx="9" fill="#e8edf3" stroke="#71869b" strokeWidth="3" />
+                <circle cx="0" cy="42" r="10" fill="#a32638" />
+                <circle cx="0" cy="42" r="4" fill="#0d1b2a" />
+                <circle cx="0" cy="42" r="18" fill="none" stroke="#0aa5a0" strokeOpacity=".6" />
               </g>
             </g>
 
