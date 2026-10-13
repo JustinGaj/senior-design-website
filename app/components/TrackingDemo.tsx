@@ -35,15 +35,18 @@ export function TrackingDemo() {
         const aircraftY = 62 + Math.sin(seconds * 1.2) * 4;
         const targetX = 675 + Math.sin(seconds * 0.72) * 95;
         const targetY = mode === "ground" ? 306 : 166 + Math.sin(seconds * 0.62) * 25;
-        const angle = -Math.atan2(targetX - aircraftX, targetY - (aircraftY + 20));
-        const lensX = aircraftX - Math.sin(angle) * 72;
-        const lensY = aircraftY + 20 + Math.cos(angle) * 72;
+
+        // The camera's pivot is fixed to the drone's underside; only its pan angle changes.
+        const pivotY = aircraftY + 79;
+        const angle = -Math.atan2(targetX - aircraftX, targetY - pivotY);
+        const lensX = aircraftX - Math.sin(angle) * 13;
+        const lensY = pivotY + Math.cos(angle) * 13;
 
         aircraft.setAttribute("transform", `translate(${aircraftX} ${aircraftY})`);
         groundTarget.setAttribute("transform", `translate(${targetX} 306)`);
         airTarget.setAttribute("transform", `translate(${targetX} ${targetY})`);
         lockRing.setAttribute("transform", `translate(${targetX} ${targetY})`);
-        gimbal.setAttribute("transform", `rotate(${angle * 180 / Math.PI} 0 20)`);
+        gimbal.setAttribute("transform", `rotate(${angle * 180 / Math.PI} 0 79)`);
         beam.setAttribute("x1", String(lensX));
         beam.setAttribute("y1", String(lensY));
         beam.setAttribute("x2", String(targetX));
@@ -126,7 +129,8 @@ export function TrackingDemo() {
               <path d="M-88 -15H-49M49 -15H88" stroke="#0aa5a0" strokeWidth="5" strokeLinecap="round" />
               <rect x="-24" y="-8" width="48" height="28" rx="11" fill="#16293f" />
               <path d="M0 20V79" stroke="#71869b" strokeWidth="6" />
-              <g data-gimbal>
+              <circle cx="0" cy="79" r="8" fill="#0aa5a0" stroke="#fff" strokeWidth="3" />
+              <g data-gimbal transform="rotate(0 0 79)">
                 <rect x="-28" y="72" width="56" height="40" rx="13" fill="#e8edf3" stroke="#71869b" strokeWidth="3" />
                 <circle cx="0" cy="92" r="12" fill="#a32638" />
                 <circle cx="0" cy="92" r="5" fill="#0d1b2a" />
@@ -158,7 +162,7 @@ export function TrackingDemo() {
             </text>
           </svg>
         </div>
-        <p className="tracking-caption">The dashed line represents the camera’s line of sight; the gimbal pivots to keep the selected target centered.</p>
+        <p className="tracking-caption">The camera is physically mounted below the aircraft in this concept view. Its gimbal pivots at that mount to keep the selected target centered.</p>
       </div>
     </section>
   );
