@@ -33,7 +33,9 @@ const milestones = [
   ["M5", "Final design review", "Beta prototype assessment"],
   ["M6", "Report & expo", "Final demonstration and project handoff"],
 ];
-const schedule = [\n  ["Requirements & user needs", 2, 3], ["Concept selection", 2, 4], ["Detailed design & analysis", 3, 5], ["Prototype build & integration", 4, 7], ["Verification & demonstration", 5, 8], ["Final report & expo", 6, 8]\n];\nconst bom = [
+const schedule = [
+  ["Requirements & user needs", 1, 2], ["Concept selection", 1, 3], ["Detailed design & analysis", 2, 4], ["Prototype build & integration", 3, 6], ["Verification & demonstration", 4, 7], ["Final report & expo", 5, 7]
+];\nconst bom = [
   ["Compute", "Jetson Orin Nano", "1", "TBD"],
   ["Camera", "Long-range optical camera", "1", "TBD"],
   ["Motion", "2-axis gimbal, motors & drivers", "1 set", "TBD"],
