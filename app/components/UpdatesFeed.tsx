@@ -11,9 +11,10 @@ type Update = {
   href?: string;
 };
 
-export function UpdatesFeed() {
+export function UpdatesFeed({ limit }: { limit?: number } = {}) {
   const [updates, setUpdates] = useState<Update[]>([]);
   const [source, setSource] = useState("local");
+  const visibleUpdates = limit ? updates.slice(0, limit) : updates;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -43,9 +44,9 @@ export function UpdatesFeed() {
           </div>
           <div className="cadence"><span className="pulse" /> BI-WEEKLY UPDATES</div>
         </div>
-        {updates.length > 0 ? (
+        {visibleUpdates.length > 0 ? (
           <div className="updates-grid">
-            {updates.map((update, index) => (
+            {visibleUpdates.map((update, index) => (
               <article className="update-card" key={update.title + index}>
                 <div className={`update-art art-${update.image}`}>
                   <span>{update.category}</span>
@@ -71,6 +72,11 @@ export function UpdatesFeed() {
         <div className="feed-note">
           Updates source: {source === "n8n" ? "project management feed" : "project team"} <span>·</span> Maintained every two weeks
         </div>
+        {limit && (
+          <a className="button ghost updates-more" href="#updates">
+            View all project updates <span aria-hidden="true">↗</span>
+          </a>
+        )}
       </div>
     </section>
   );
