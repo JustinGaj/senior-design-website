@@ -123,7 +123,7 @@ const tabs: ProjectTab[] = [
                     </div>
                     <div className="hero-note"><span className="pulse" /> ME 423 · 2025–2026 · Sponsored by Siemens</div>
                   </div>
-                  <div className="visual" role="img" aria-label="Illustration of a stabilized gimbal mounted below a drone">
+                  <div className="visual" role="img" aria-label="Drone with a compact horizontal camera gimbal and rubber vibration dampeners mounted underneath">
                     <svg viewBox="0 0 680 520" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <defs>
                         <linearGradient id="frame" x1="100" y1="20" x2="580" y2="510">
@@ -161,10 +161,11 @@ const tabs: ProjectTab[] = [
                       <rect x="34" y="220" width="174" height="58" rx="12" fill="#0D1B2A" fillOpacity=".86" stroke="white" strokeOpacity=".14" />
                       <text x="48" y="241" fill="#9FB0C4" fontFamily="monospace" fontSize="9">VIBRATION ISOLATION</text>
                       <text x="48" y="259" fill="white" fontFamily="monospace" fontSize="11">Rubber dampeners</text>
-                      <path d="M405 251l89 115" stroke="#0AA5A0" strokeDasharray="5 5" />
-                      <rect x="497" y="365" width="153" height="62" rx="12" fill="#0D1B2A" fillOpacity=".84" stroke="white" strokeOpacity=".12" />
-                      <text x="511" y="383" fill="#9FB0C4" fontFamily="monospace" fontSize="9">2-AXIS GIMBAL</text>
-                      <text x="511" y="408" fill="white" fontFamily="monospace" fontSize="12">TARGET LOCK · TRACKING</text>
+                      <path d="M405 251l71 104" stroke="#0AA5A0" strokeDasharray="5 5" />
+                      <rect x="476" y="355" width="174" height="76" rx="12" fill="#0D1B2A" fillOpacity=".84" stroke="white" strokeOpacity=".12" />
+                      <text x="490" y="374" fill="#9FB0C4" fontFamily="monospace" fontSize="8">PAYLOAD · 2-AXIS GIMBAL</text>
+                      <text x="490" y="394" fill="white" fontFamily="monospace" fontSize="10">JETSON ORIN NANO</text>
+                      <text x="490" y="415" fill="#9FB0C4" fontFamily="monospace" fontSize="9">TARGET LOCK · ACTIVE</text>
                     </svg>
                   </div>
                 </div>
