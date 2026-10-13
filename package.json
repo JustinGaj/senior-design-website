@@ -2,8 +2,24 @@
   "name": "gimbaled-drone-project-site",
   "version": "1.0.0",
   "private": true,
-  "engines": { "node": ">=20.9" },
-  "scripts": { "dev": "next dev", "build": "next build", "start": "next start", "check": "tsc --noEmit" },
-  "dependencies": { "next": "^16.4.0", "react": "^19.3.0", "react-dom": "^19.3.0" },
-  "devDependencies": { "@types/node": "^20.14.0", "@types/react": "^19.0.0", "@types/react-dom": "^19.0.0", "typescript": "^5.5.0" }
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.5.0"
+  }
 }
