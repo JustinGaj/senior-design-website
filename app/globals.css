@@ -2226,3 +2226,121 @@ details.disclosure > summary small {
     align-items: center !important;
   }
 }
+
+
+/* Project section tabs */
+.project-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 68px;
+  padding: 0 max(20px, calc((100vw - 1160px) / 2));
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, .94);
+  backdrop-filter: blur(16px);
+}
+
+.project-tabs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.project-tab {
+  min-height: 42px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font: 650 12px Inter, sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .18s ease, color .18s ease;
+}
+
+.project-tab:hover {
+  background: #f3f5f7;
+  color: var(--ink);
+}
+
+.project-tab[aria-selected="true"] {
+  background: #f8e9eb;
+  color: var(--brand);
+}
+
+.project-tab:focus-visible,
+.project-nav a:focus-visible,
+.tab-panel:focus-visible {
+  outline: 3px solid #0aa5a0;
+  outline-offset: 3px;
+}
+
+.tab-page {
+  min-height: 65vh;
+}
+
+.tab-panel {
+  outline: none;
+}
+
+.tab-panel > .hero {
+  padding-top: 66px;
+}
+
+.tab-panel > .hero:first-child {
+  padding-top: 66px;
+}
+
+.tab-panel > section:first-child:not(.hero) {
+  padding-top: 64px;
+}
+
+@media (max-width: 760px) {
+  .project-nav {
+    display: block;
+    padding: 10px 0 0;
+  }
+
+  .project-nav .brand {
+    display: none;
+  }
+
+  .project-tabs {
+    width: 100%;
+    overflow-x: auto;
+    padding: 0 12px 9px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .project-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-tab {
+    min-height: 42px;
+    padding-inline: 13px;
+    font-size: 11px;
+  }
+
+  .tab-panel > .hero,
+  .tab-panel > .hero:first-child {
+    padding-top: 38px;
+  }
+
+  .tab-panel > section:first-child:not(.hero) {
+    padding-top: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-tab {
+    transition: none;
+  }
+}
