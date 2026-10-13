@@ -137,7 +137,7 @@ export function TrackingDemo() {
             <path d="M0 265 Q160 245 320 268 T640 260 T900 270 V380 H0Z" fill="#dce8d4" />
             <path d="M0 294 Q175 280 330 295 T670 288 T900 298" stroke="#c1d4b7" strokeWidth="2" fill="none" />
 
-            <line data-beam x1="167.5" y1="105.2" x2="675" y2="306" stroke="#a32638" strokeWidth="2" strokeDasharray="8 7" />
+            <line data-beam x1="167.6" y1="106.2" x2="675" y2="306" stroke="#a32638" strokeWidth="2" strokeDasharray="8 7" />
             <g data-lock-ring transform="translate(675 306)">
               <circle r="35" fill="none" stroke="#0aa5a0" strokeOpacity=".32" />
               <circle r="57" fill="none" stroke="#0aa5a0" strokeOpacity=".16" />
