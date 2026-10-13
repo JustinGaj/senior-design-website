@@ -16,12 +16,30 @@ export function TrackingDemo() {
     const groundTarget = svg.querySelector<SVGGElement>("[data-ground-target]");
     const airTarget = svg.querySelector<SVGGElement>("[data-air-target]");
     const beam = svg.querySelector<SVGLineElement>("[data-beam]");
-    const gimbal = svg.querySelector<SVGGElement>("[data-gimbal]");
+    const eye = svg.querySelector<SVGGElement>("[data-eye]");
     const lockRing = svg.querySelector<SVGGElement>("[data-lock-ring]");
-    if (!aircraft || !groundTarget || !airTarget || !beam || !gimbal || !lockRing) return;
+    if (!aircraft || !groundTarget || !airTarget || !beam || !eye || !lockRing) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) return;
+    if (reducedMotion) {
+      const aircraftX = 162;
+      const aircraftY = 62;
+      const targetX = mode === "ground" ? 675 : 560;
+      const targetY = mode === "ground" ? 306 : 166;
+      const pivotY = aircraftY + 42;
+      const angle = -Math.atan2(targetX - aircraftX, targetY - pivotY);
+
+      aircraft.setAttribute("transform", `translate(${aircraftX} ${aircraftY})`);
+      groundTarget.setAttribute("transform", `translate(${targetX} 306)`);
+      airTarget.setAttribute("transform", `translate(${targetX} ${targetY})`);
+      lockRing.setAttribute("transform", `translate(${targetX} ${targetY})`);
+      eye.setAttribute("transform", `rotate(${angle * 180 / Math.PI} 0 42)`);
+      beam.setAttribute("x1", String(aircraftX - Math.sin(angle) * 4));
+      beam.setAttribute("y1", String(pivotY + Math.cos(angle) * 4));
+      beam.setAttribute("x2", String(targetX));
+      beam.setAttribute("y2", String(targetY));
+      return;
+    }
 
     let frame = 0;
     let active = false;
@@ -33,20 +51,22 @@ export function TrackingDemo() {
         const seconds = time / 1000;
         const aircraftX = 162 + Math.sin(seconds * 0.55) * 20;
         const aircraftY = 62 + Math.sin(seconds * 1.2) * 4;
-        const targetX = 675 + Math.sin(seconds * 0.72) * 95;
+        const targetX = mode === "ground"
+          ? 675 + Math.sin(seconds * 0.72) * 95
+          : 560 + Math.sin(seconds * 0.72) * 70;
         const targetY = mode === "ground" ? 306 : 166 + Math.sin(seconds * 0.62) * 25;
 
         // The camera's pivot is fixed to the drone's underside; only its pan angle changes.
-        const pivotY = aircraftY + 30;
+        const pivotY = aircraftY + 42;
         const angle = -Math.atan2(targetX - aircraftX, targetY - pivotY);
-        const lensX = aircraftX - Math.sin(angle) * 12;
-        const lensY = pivotY + Math.cos(angle) * 12;
+        const lensX = aircraftX - Math.sin(angle) * 4;
+        const lensY = pivotY + Math.cos(angle) * 4;
 
         aircraft.setAttribute("transform", `translate(${aircraftX} ${aircraftY})`);
         groundTarget.setAttribute("transform", `translate(${targetX} 306)`);
         airTarget.setAttribute("transform", `translate(${targetX} ${targetY})`);
         lockRing.setAttribute("transform", `translate(${targetX} ${targetY})`);
-        gimbal.setAttribute("transform", `rotate(${angle * 180 / Math.PI} 0 30)`);
+        eye.setAttribute("transform", `rotate(${angle * 180 / Math.PI} 0 42)`);
         beam.setAttribute("x1", String(lensX));
         beam.setAttribute("y1", String(lensY));
         beam.setAttribute("x2", String(targetX));
@@ -117,7 +137,7 @@ export function TrackingDemo() {
             <path d="M0 265 Q160 245 320 268 T640 260 T900 270 V380 H0Z" fill="#dce8d4" />
             <path d="M0 294 Q175 280 330 295 T670 288 T900 298" stroke="#c1d4b7" strokeWidth="2" fill="none" />
 
-            <line data-beam x1="162" y1="154" x2="675" y2="306" stroke="#a32638" strokeWidth="2" strokeDasharray="8 7" />
+            <line data-beam x1="165.7" y1="101.5" x2="675" y2="306" stroke="#a32638" strokeWidth="2" strokeDasharray="8 7" />
             <g data-lock-ring transform="translate(675 306)">
               <circle r="35" fill="none" stroke="#0aa5a0" strokeOpacity=".32" />
               <circle r="57" fill="none" stroke="#0aa5a0" strokeOpacity=".16" />
@@ -133,11 +153,16 @@ export function TrackingDemo() {
               <rect x="8" y="20" width="9" height="6" rx="3" fill="#27313c" />
               <rect x="-21" y="26" width="42" height="4" rx="2" fill="#aab9c8" />
               <circle cx="0" cy="30" r="6" fill="#0aa5a0" stroke="#fff" strokeWidth="3" />
-              <g data-gimbal transform="rotate(0 0 30)">
+              <g data-gimbal>
                 <rect x="-26" y="28" width="52" height="28" rx="9" fill="#e8edf3" stroke="#71869b" strokeWidth="3" />
                 <circle cx="0" cy="42" r="10" fill="#a32638" />
-                <circle cx="0" cy="42" r="4" fill="#0d1b2a" />
+                <circle cx="0" cy="42" r="7" fill="#0d1b2a" />
                 <circle cx="0" cy="42" r="18" fill="none" stroke="#0aa5a0" strokeOpacity=".6" />
+                <g data-eye transform="rotate(-68 0 42)">
+                  <path d="M0 42V46" stroke="#0aa5a0" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="0" cy="46" r="3" fill="#0aa5a0" />
+                  <circle cx="-1" cy="45" r="1" fill="#e7eef6" />
+                </g>
               </g>
             </g>
 
@@ -146,7 +171,7 @@ export function TrackingDemo() {
               <path d="M-18 0H18M0 -18V18" stroke="#fff" strokeWidth="2" />
               <circle r="25" fill="none" stroke="#ff8a1f" strokeOpacity=".45" />
             </g>
-            <g data-air-target transform="translate(675 166)" style={{ display: mode === "air" ? "block" : "none" }}>
+            <g data-air-target transform="translate(560 166)" style={{ display: mode === "air" ? "block" : "none" }}>
               <path d="M-40 0H40" stroke="#44566c" strokeWidth="6" strokeLinecap="round" />
               <path d="M-26 -2L-40 -15M26 -2L40 -15" stroke="#44566c" strokeWidth="4" />
               <path d="M-52 -16H-30M30 -16H52" stroke="#0aa5a0" strokeWidth="4" strokeLinecap="round" />
@@ -165,7 +190,7 @@ export function TrackingDemo() {
             </text>
           </svg>
         </div>
-        <p className="tracking-caption">The camera is physically mounted below the aircraft in this concept view. Its gimbal pivots at that mount to keep the selected target centered.</p>
+        <p className="tracking-caption">The camera housing stays level beneath the aircraft; its internal optical eye pans to follow the selected ground or aerial target.</p>
       </div>
     </section>
   );
