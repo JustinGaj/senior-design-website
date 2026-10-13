@@ -72,7 +72,7 @@ export function ProjectTabs({ tabs }: { tabs: ProjectTab[] }) {
         </div>
       </header>
       <main className="tab-page">
-        <section
+        <div
           id={`panel-${activeTab.id}`}
           className="tab-panel"
           role="tabpanel"
@@ -80,9 +80,9 @@ export function ProjectTabs({ tabs }: { tabs: ProjectTab[] }) {
           tabIndex={0}
         >
           {activeTab.content}
-        </section>
+        </div>
         {tabs.filter((tab) => tab.id !== activeTab.id).map((tab) => (
-          <section
+          <div
             key={tab.id}
             id={`panel-${tab.id}`}
             role="tabpanel"
