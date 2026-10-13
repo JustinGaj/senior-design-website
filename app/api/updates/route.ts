@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 
+// Seed entries are summaries of material in the project brief, not dated progress claims.
+// Replace them with approved bi-weekly posts when the n8n feed is connected.
 const fallback = [
-  { date: "2026-10-13", title: "Project kickoff and requirements", category: "Project", summary: "The team aligned on system goals, user needs, and initial performance targets.", image: "engineering" },
-  { date: "2026-10-27", title: "Concept review", category: "Design", summary: "We compared candidate camera, compute, gimbal, and control architectures against the weighted criteria.", image: "concept" },
-  { date: "2026-11-10", title: "Integration plan", category: "Integration", summary: "Mechanical packaging, power distribution, sensing, and software interfaces are being brought together.", image: "flight" }
+  { title: "Project goals and requirements", category: "Project", summary: "The brief sets goals for target range, gimbal mass, power, camera rate, and stable tracking.", image: "engineering" },
+  { title: "Concepts under evaluation", category: "Design", summary: "Candidate compute, camera, gimbal, and control architectures are compared against weighted criteria.", image: "concept" },
+  { title: "Integration approach", category: "Engineering", summary: "The proposed system combines optical sensing, onboard compute, inertial feedback, and a wireless ground station.", image: "flight" }
 ];
 
 export async function GET() {
