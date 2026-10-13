@@ -33,3 +33,7 @@ The page requests this endpoint on load. The route falls back to local entries i
 ## Content editing
 
 Project descriptions, team roles, design alternatives, engineering targets, planning milestones, BOM rows, and local update entries are in `app/page.tsx` and `app/api/updates/route.ts`. Verify engineering targets, budget values, milestones, and update dates with the team before publishing them as current.
+
+## Bundler
+
+The `dev` and `build` scripts use Next.js Webpack mode for compatibility with Windows environments where Turbopack native bindings are unavailable.
