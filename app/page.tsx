@@ -164,7 +164,7 @@ const tabs: ProjectTab[] = [
                       <path d="M398 237l78 118" stroke="#0AA5A0" strokeDasharray="5 5" />
                       <rect x="476" y="355" width="174" height="76" rx="12" fill="#0D1B2A" fillOpacity=".84" stroke="white" strokeOpacity=".12" />
                       <text x="490" y="374" fill="#9FB0C4" fontFamily="monospace" fontSize="8">PAYLOAD · 2-AXIS GIMBAL</text>
-                      <text x="490" y="394" fill="white" fontFamily="monospace" fontSize="10">JETSON ORIN NANO</text>
+                      <text x="490" y="394" fill="white" fontFamily="monospace" fontSize="9">ONBOARD VISION COMPUTE</text>
                       <text x="490" y="415" fill="#9FB0C4" fontFamily="monospace" fontSize="9">TARGET LOCK · ACTIVE</text>
                     </svg>
                   </div>
@@ -204,6 +204,8 @@ const tabs: ProjectTab[] = [
               </section>
       
               <TrackingDemo />
+
+              <UpdatesFeed limit={2} />
     </>
   ) },
   { id: "team", label: "Team", content: (
@@ -359,12 +361,7 @@ const tabs: ProjectTab[] = [
     <>
       <UpdatesFeed />
       
-              <section className="closing">
-                <div className="wrap closing-inner">
-                  <div><div className="eyebrow">ME 423 · STEVENS INSTITUTE OF TECHNOLOGY</div><h2>Built to keep the view steady.</h2><p>Gimbaled Drone System · Siemens Senior Design Project</p></div>
-                  <a className="button primary" href="#home">Back to top ↑</a>
-                </div>
-              </section>
+              
     </>
   ) },
 ];
