@@ -142,21 +142,29 @@ const tabs: ProjectTab[] = [
                       <path d="M91 131h106M484 131h106" stroke="#0AA5A0" strokeWidth="7" strokeLinecap="round" />
                       <circle cx="144" cy="131" r="10" fill="#0AA5A0" /><circle cx="537" cy="131" r="10" fill="#0AA5A0" />
                       <rect x="288" y="161" width="104" height="32" rx="12" fill="#16293F" stroke="#71869B" />
-                      <path d="M340 193v70" stroke="#FF7B8C" strokeWidth="7" />
-                      <rect x="268" y="259" width="144" height="118" rx="28" fill="#E9EDF2" />
-                      <rect x="284" y="273" width="112" height="88" rx="18" fill="#16293F" />
-                      <circle cx="340" cy="317" r="29" fill="url(#lens)" /><circle cx="340" cy="317" r="15" fill="#0D1B2A" />
-                      <circle cx="335" cy="311" r="5" fill="#DCE8F2" />
-                      <path d="M268 282h-34v70h34M412 282h34v70h-34" stroke="#0AA5A0" strokeWidth="5" />
-                      <path d="M340 390v35" stroke="#FF7B8C" strokeDasharray="5 7" /><circle cx="340" cy="441" r="12" fill="#FF7B8C" />
-                      <circle cx="340" cy="441" r="28" stroke="#FF7B8C" strokeOpacity=".5" />
-                      <rect x="34" y="30" width="167" height="34" rx="17" fill="#0D1B2A" fillOpacity=".72" stroke="white" strokeOpacity=".16" />
+                      <rect x="309" y="191" width="13" height="12" rx="4" fill="#27313C" />
+                      <rect x="358" y="191" width="13" height="12" rx="4" fill="#27313C" />
+                      <rect x="295" y="201" width="90" height="8" rx="4" fill="#AAB9C8" />
+                      <rect x="280" y="209" width="120" height="67" rx="19" fill="#E9EDF2" />
+                      <rect x="292" y="217" width="96" height="51" rx="14" fill="#16293F" />
+                      <circle cx="340" cy="242" r="20" fill="url(#lens)" />
+                      <circle cx="340" cy="242" r="10" fill="#0D1B2A" />
+                      <circle cx="336" cy="238" r="4" fill="#DCE8F2" />
+                      <path d="M280 220h-14v42h14M400 220h14v42h-14" stroke="#0AA5A0" strokeWidth="5" />
+                      <path d="M340 279v102" stroke="#FF7B8C" strokeDasharray="5 7" />
+                      <circle cx="340" cy="398" r="12" fill="#FF7B8C" />
+                      <circle cx="340" cy="398" r="28" stroke="#FF7B8C" strokeOpacity=".5" />
+                      <rect x="34" y="30" width="206" height="34" rx="17" fill="#0D1B2A" fillOpacity=".82" stroke="white" strokeOpacity=".16" />
                       <circle cx="54" cy="47" r="5" fill="#0AA5A0" />
-                      <text x="68" y="51" fill="#E7EEF6" fontFamily="monospace" fontSize="11" letterSpacing="1">STABILIZATION ACTIVE</text>
-                      <path d="M439 315l74 50" stroke="#0AA5A0" strokeDasharray="5 5" />
-                      <rect x="497" y="365" width="143" height="49" rx="12" fill="#0D1B2A" fillOpacity=".84" stroke="white" strokeOpacity=".12" />
-                      <text x="511" y="385" fill="#9FB0C4" fontFamily="monospace" fontSize="9">TARGET LOCK</text>
-                      <text x="511" y="402" fill="white" fontFamily="monospace" fontSize="12">TRACKING</text>
+                      <text x="68" y="51" fill="#E7EEF6" fontFamily="monospace" fontSize="10" letterSpacing=".7">IMU STABILIZATION ON</text>
+                      <path d="M208 245L279 205" stroke="#0AA5A0" strokeDasharray="4 5" strokeOpacity=".8" />
+                      <rect x="34" y="220" width="174" height="58" rx="12" fill="#0D1B2A" fillOpacity=".86" stroke="white" strokeOpacity=".14" />
+                      <text x="48" y="241" fill="#9FB0C4" fontFamily="monospace" fontSize="9">VIBRATION ISOLATION</text>
+                      <text x="48" y="259" fill="white" fontFamily="monospace" fontSize="11">Rubber dampeners</text>
+                      <path d="M405 251l89 115" stroke="#0AA5A0" strokeDasharray="5 5" />
+                      <rect x="497" y="365" width="153" height="62" rx="12" fill="#0D1B2A" fillOpacity=".84" stroke="white" strokeOpacity=".12" />
+                      <text x="511" y="383" fill="#9FB0C4" fontFamily="monospace" fontSize="9">2-AXIS GIMBAL</text>
+                      <text x="511" y="408" fill="white" fontFamily="monospace" fontSize="12">TARGET LOCK · TRACKING</text>
                     </svg>
                   </div>
                 </div>
