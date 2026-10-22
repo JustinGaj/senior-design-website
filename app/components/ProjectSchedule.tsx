@@ -113,7 +113,7 @@ export function ProjectSchedule() {
       <div className="gantt-scroll" role="region" aria-label="Project Gantt chart; scroll horizontally for all dates" tabIndex={0}>
         <div className="gantt">
           <div className="gantt-head">
-            <b>Task name · Assigned · Status</b>
+            <b>Task name · Status</b>
             <div className="gantt-weeks">
               {weeks.map((week) => <span key={week.start}>{week.label}</span>)}
             </div>
@@ -129,13 +129,13 @@ export function ProjectSchedule() {
                 </div>
                 {phase.tasks.map((task) => (
                   <div className="gantt-row" key={task.id}>
-                    <b>{task.id} · {task.name}<small>unassigned · {task.status}</small></b>
+                    <b>{task.id} · {task.name}<small>{task.status}</small></b>
                     <div className="gantt-track">
                       <i
                         style={barStyle(task.start, task.end)}
                         title={task.name + ": " + task.start + " – " + task.end + " · " + task.status}
                         role="img"
-                        aria-label={task.name + ": " + task.start + " to " + task.end + "; unassigned; " + task.status}
+                        aria-label={task.name + ": " + task.start + " to " + task.end + "; " + task.status}
                       />
                     </div>
                   </div>
