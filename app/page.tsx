@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ConceptChooser, type Concept } from "./components/ConceptChooser";
 import { ProjectSchedule } from "./components/ProjectSchedule";
 import { TrackingDemo } from "./components/TrackingDemo";
@@ -5,12 +6,12 @@ import { UpdatesFeed } from "./components/UpdatesFeed";
 import { ProjectTabs, type ProjectTab } from "./components/ProjectTabs";
 
 const team = [
-  { name: "Claire Deatrick", role: "Mechanical Design Lead", focus: "Mechanical design and enclosure.", initials: "CD", linkedIn: "https://www.linkedin.com/in/claire-deatrick-a4749a298/", avatar: "a0" },
-  { name: "Chris Persico", role: "Systems Lead", focus: "System requirements and interactions.", initials: "CP", linkedIn: "https://www.linkedin.com/in/christopher-m-persico/", avatar: "a4" },
-  { name: "Robert Dominik", role: "Testing Lead", focus: "Test procedures and performance evaluation.", initials: "RD", linkedIn: "https://www.linkedin.com/in/r-dominik/", avatar: "a5" },
-  { name: "Ryan Paradine", role: "Hardware Lead", focus: "Electronics and sensor components.", initials: "RP", linkedIn: "https://www.linkedin.com/in/ryan-paradine-73b147388/", avatar: "a1" },
-  { name: "Justin Gajewski", role: "Software Lead", focus: "Computer vision and control logic.", initials: "JG", linkedIn: "https://www.linkedin.com/in/justingaj/", avatar: "a2" },
-  { name: "Matthew Hodorowski", role: "Integration Lead", focus: "Hardware and software integration.", initials: "MH", linkedIn: "https://www.linkedin.com/in/matthew-hodorowski/", avatar: "a3" },
+  { name: "Claire Deatrick", role: "Mechanical Design Lead", focus: "Mechanical design and enclosure.", photo: "/images/team/claire-deatrick.png", linkedIn: "https://www.linkedin.com/in/claire-deatrick-a4749a298/", avatar: "a0" },
+  { name: "Chris Persico", role: "Systems Lead", focus: "System requirements and interactions.", photo: "/images/team/chris-persico.jpg", linkedIn: "https://www.linkedin.com/in/christopher-m-persico/", avatar: "a4" },
+  { name: "Robert Dominik", role: "Testing Lead", focus: "Test procedures and performance evaluation.", photo: "/images/team/robert-dominik.png", linkedIn: "https://www.linkedin.com/in/r-dominik/", avatar: "a5" },
+  { name: "Ryan Paradine", role: "Hardware Lead", focus: "Electronics and sensor components.", photo: "/images/team/ryan-paradine.jpg", linkedIn: "https://www.linkedin.com/in/ryan-paradine-73b147388/", avatar: "a1" },
+  { name: "Justin Gajewski", role: "Software Lead", focus: "Computer vision and control logic.", photo: "/images/team/justin-gajewski.jpg", linkedIn: "https://www.linkedin.com/in/justingaj/", avatar: "a2" },
+  { name: "Matthew Hodorowski", role: "Integration Lead", focus: "Hardware and software integration.", photo: "/images/team/matthew-hodorowski.jpg", linkedIn: "https://www.linkedin.com/in/matthew-hodorowski/", avatar: "a3" },
 ];
 
 const concepts: Concept[] = [
@@ -205,7 +206,16 @@ const tabs: ProjectTab[] = [
                   <div className="team-grid">
                     {team.map((member) => (
                       <article className="card person" key={member.name}>
-                        <span className={`avatar ${member.avatar}`} aria-hidden="true">{member.initials}</span>
+                        <span className={`avatar ${member.avatar}`}>
+                          <Image
+                            className="avatar-photo"
+                            src={member.photo}
+                            alt={`${member.name} profile portrait`}
+                            width={54}
+                            height={54}
+                            sizes="(max-width: 680px) 44px, 54px"
+                          />
+                        </span>
                         <h3><a href={member.linkedIn} target="_blank" rel="noreferrer">{member.name} ↗</a></h3>
                         <div className="role">{member.role}</div>
                         <p>{member.focus}</p>
