@@ -17,6 +17,7 @@ const team = [
 const concepts: Concept[] = [
   {
     n: "3",
+    image: { src: "/images/concepts/concept-3.jpg", width: 1668, height: 2157, viewHeight: 951, alt: "Orange Pi and Arduino electronics enclosure with viscous dampers, stepper yaw and pitch motors, and a Lucid Triton 2 camera." },
     name: "Concept 3",
     body: "Orange Pi 5 Plus · Lucid Triton 2",
     score: "Net +3 · Rank 1",
@@ -26,6 +27,7 @@ const concepts: Concept[] = [
   },
   {
     n: "5",
+    image: { src: "/images/concepts/concept-5.jpg", width: 1920, height: 1484, viewHeight: 1484, alt: "Autonomous hexacopter with LiPo batteries, rubber dampers, pancake motor gimbal, FarVis22 camera, and Jetson and FPGA electronics enclosure." },
     name: "Concept 5",
     body: "Jetson Orin Nano · FarVis22 10X",
     score: "Net +2 · Rank 2",
@@ -35,6 +37,7 @@ const concepts: Concept[] = [
   },
   {
     n: "6",
+    image: { src: "/images/concepts/concept-6.jpg", width: 809, height: 426, viewHeight: 426, alt: "Two-axis servo gimbal with an FPGA, lithium-ion battery, polymer damper, FarVis22 camera, and a perspective view." },
     name: "Concept 6",
     body: "Jetson Orin Nano · FarVis22 10X",
     score: "Net +1 · Rank 3",
@@ -44,6 +47,7 @@ const concepts: Concept[] = [
   },
   {
     n: "7",
+    image: { src: "/images/concepts/concept-7.jpg", width: 827, height: 532, viewHeight: 532, alt: "Three-axis brushless gimbal with Arduino control, LiPo battery, viscous damper, Lucid Triton 2 camera, and an alternate view." },
     name: "Concept 7",
     body: "Raspberry Pi 5 + AI Hat · Lucid Triton 2",
     score: "Net +1 · Rank 3",

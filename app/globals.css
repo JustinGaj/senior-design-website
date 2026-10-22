@@ -729,96 +729,30 @@ h1,h2,h3,p {
 }
 
 .concept-visual {
-  height: 225px;
-  position: relative;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle at 55% 42%, #24415e, #0d1b2a 75%);
-  overflow: hidden;
+  background: #fff;
 }
 
-.concept-visual:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(rgba(255, 255, 255, .08) 1px, transparent 1px), linear-gradient(90deg, #fff08 1px, transparent 1px);
-  background-size: 34px 34px;
-  opacity: .22;
+.concept-visual-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--navy);
+  color: #fff;
 }
 
 .concept-tag {
-  position: absolute;
-  left: 18px;
-  top: 16px;
   color: #bdc9d8;
   font-size: 9px;
 }
 
-.radar {
-  position: relative;
-  width: 150px;
-  height: 150px;
-  border: 1px solid #0aa5a080;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: var(--teal);
-  font-size: 24px;
-}
-
-.radar:before,.radar:after {
-  content: "";
-  position: absolute;
-  border: 1px solid #0aa5a055;
-  border-radius: 50%;
-  inset: 20px;
-}
-
-.radar:after {
-  inset: 48px;
-}
-
-.radar>i {
-  position: absolute;
-  width: 1px;
-  height: 100%;
-  background: #0aa5a033;
-}
-
-.radar>i:nth-child(2) {
-  transform: rotate(90deg);
-}
-
-.radar>i:nth-child(3) {
-  transform: rotate(45deg);
-}
-
-.radar b {
-  z-index: 1;
-  font-weight: 400;
-}
-
-.radar-dot {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ff7b8c;
-  top: 33px;
-  right: 41px;
-  box-shadow: 0 0 0 7px #ff7b8c32;
-}
-
 .concept-caption {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background: #0d1b2ae8;
-  padding: 11px 16px;
-  border-radius: 12px 0 0 0;
+  text-align: right;
 }
 
-.concept-caption small,.concept-caption strong {
+.concept-caption small,
+.concept-caption strong {
   display: block;
 }
 
@@ -831,6 +765,29 @@ h1,h2,h3,p {
 .concept-caption strong {
   font-size: 12px;
   margin-top: 3px;
+}
+
+.concept-image-link {
+  display: block;
+  padding: 16px;
+  color: var(--brand);
+  text-decoration: none;
+}
+
+.concept-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+}
+
+.concept-full-size {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 650;
+  text-align: right;
 }
 
 .concept-description {
@@ -1886,10 +1843,6 @@ h1,h2,h3,p {
 
   .concept-choice .arrow {
     display: none;
-  }
-
-  .concept-visual {
-    height: 205px;
   }
 
   .concept-description {

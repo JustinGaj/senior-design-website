@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export type Concept = {
   n: string;
+  image: { src: string; width: number; height: number; viewHeight: number; alt: string };
   name: string;
   body: string;
   score: string;
@@ -46,9 +47,23 @@ export function ConceptChooser({ concepts }: { concepts: Concept[] }) {
             </div>
             <article className="concept-feature" aria-live="polite">
               <div className="concept-visual">
-                <span className="concept-tag">CONCEPT {concept.n} / 8</span>
-                <div className="radar" aria-hidden="true"><i /><i /><i /><b>+</b><span className="radar-dot" /></div>
-                <div className="concept-caption"><small>WEIGHTED MATRIX</small><strong>{concept.score}</strong></div>
+                <div className="concept-visual-header">
+                  <span className="concept-tag">CONCEPT {concept.n} / 8</span>
+                  <div className="concept-caption"><small>WEIGHTED MATRIX</small><strong>{concept.score}</strong></div>
+                </div>
+                <a className="concept-image-link" href={concept.image.src} target="_blank" rel="noreferrer" aria-label={`Open full-size ${concept.name} diagram`}>
+                  <svg
+                    className="concept-diagram"
+                    viewBox={`0 0 ${concept.image.width} ${concept.image.viewHeight}`}
+                    preserveAspectRatio="xMidYMid meet"
+                    role="img"
+                    aria-label={concept.image.alt}
+                  >
+                    {/* Concept 3 uses the report's bottom-page whitespace crop; no drawing content is clipped. */}
+                    <image href={concept.image.src} width={concept.image.width} height={concept.image.height} />
+                  </svg>
+                  <span className="concept-full-size">Full-size diagram ↗</span>
+                </a>
               </div>
               <div className="concept-description">
                 <div>
