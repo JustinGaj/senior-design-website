@@ -1,6 +1,6 @@
 # Gimbaled Drone System
 
-Responsive Next.js App Router website for the Stevens ME 423 senior design project.
+Responsive Next.js App Router website for the Stevens engineering project.
 
 ## Run locally
 

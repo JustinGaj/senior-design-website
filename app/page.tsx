@@ -105,7 +105,7 @@ const tabs: ProjectTab[] = [
       <header className="hero" id="home">
                 <div className="wrap hero-grid">
                   <div className="hero-copy">
-                    <div className="tag"><i /> ME 423 · SENIOR DESIGN · SIEMENS</div>
+                    <div className="tag"><i /> SIEMENS</div>
                     <h1>A steadier view<br />from the <em>sky.</em></h1>
                     <p className="hero-lead">
                       A lightweight, stabilized optical tracker for multi-rotor drones—built to find a target,
@@ -115,7 +115,7 @@ const tabs: ProjectTab[] = [
                       <a className="button primary" href="#project">Explore the project <span>↓</span></a>
                       <a className="button ghost" href="#tracking">See tracking demo</a>
                     </div>
-                    <div className="hero-note"><span className="pulse" /> ME 423 · 2025–2026 · Sponsored by Siemens</div>
+                    <div className="hero-note"><span className="pulse" /> Sponsored by Siemens</div>
                   </div>
                   <div className="visual" role="img" aria-label="Drone with a compact horizontal camera gimbal and rubber vibration dampeners mounted underneath">
                     <svg viewBox="0 0 680 520" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -214,7 +214,7 @@ const tabs: ProjectTab[] = [
                     ))}
                   </div>
                   <div className="people-foot">
-                    <div className="person-affil"><small>FACULTY ADVISOR</small><strong>Dr. Hamid Jafanejad Sani</strong></div>
+                    <div className="person-affil"><small>FACULTY ADVISOR</small><a href="https://www.linkedin.com/in/hamid-jafarnejad-sani-phd-37461457/" target="_blank" rel="noreferrer"><strong>Dr. Hamid Jafanejad Sani ↗</strong></a></div>
                     <div className="person-affil"><small>PROJECT SPONSOR</small><a href="https://www.siemens.com/" target="_blank" rel="noreferrer"><strong>Siemens ↗</strong></a></div>
                     <div className="person-affil"><small>INSTITUTION</small><a href="https://www.stevens.edu/" target="_blank" rel="noreferrer"><strong>Stevens Institute of Technology ↗</strong></a></div>
                   </div>
@@ -240,7 +240,7 @@ const tabs: ProjectTab[] = [
                   <SectionHeading
                     eyebrow="Technical analysis & engineering"
                     title="Performance targets shape the design."
-                    description="Review the key goals first; open the technical details for subsystem requirements and architecture."
+                    description="Subsystem requirements and the proposed system architecture."
                   />
                   <div className="metric-cards">
                     <article><strong>1.5 mi</strong><span>Target detection range</span></article>
@@ -256,7 +256,6 @@ const tabs: ProjectTab[] = [
                           {requirements.map(([name, target, limit]) => (
                             <div className="requirement-row" key={name}><span>{name}</span><b>{target}</b><small>{limit}</small></div>
                           ))}
-                          <p className="note">Targets are starting engineering goals from the project brief. Confirm final values through testing and sponsor review.</p>
                         </div>
                       </div>
                       <div className="architecture">
@@ -281,7 +280,7 @@ const tabs: ProjectTab[] = [
                   <SectionHeading
                     eyebrow="Execution plan & resources"
                     title="From design review to flight demo."
-                    description="A concise milestone view, with the detailed schedule and parts list available when needed."
+                    description="Project milestones, detailed schedule, build materials, and budget."
                   />
                   <div className="timeline">
                     {milestones.map(([id, title, description], index) => (
@@ -298,22 +297,20 @@ const tabs: ProjectTab[] = [
                     </div>
                   </details>
                   <div className="resource-grid">
-                    <details className="resource-card disclosure bom-disclosure">
-                      <summary><span><small>PRELIMINARY BOM</small><b>Build materials</b></span><span>6 groups</span></summary>
+                    <article className="resource-card card static-panel bom-disclosure">
+                      <div className="static-panel-heading"><div><small>PRELIMINARY BOM</small><h3>Build materials</h3></div><span>6 groups</span></div>
                       <div className="disclosure-body">
                         <div className="bom-list">
                           {billOfMaterials.map(([group, item, quantity, cost]) => (
                             <div className="bom-row" key={group}><span>{group}</span><b>{item}</b><small>{quantity}</small><strong>{cost}</strong></div>
                           ))}
                         </div>
-                        <p className="note">Replace TBD costs with supplier quotes and confirmed quantities.</p>
                       </div>
-                    </details>
+                    </article>
                     <article className="budget-card">
                       <div className="eyebrow">Budget baseline</div><h3>$3,000</h3><p>Project budget target</p>
                       <div className="budget-track" aria-label="Budget target is 60 percent of the current planned cap"><i style={{ width: "60%" }} /></div>
                       <div className="budget-values"><span>Target <b>$3,000</b></span><span>Current planned cap <b>$5,000</b></span></div>
-                      <div className="budget-callout">Update this panel as the BOM and sponsor contributions are confirmed.</div>
                     </article>
                   </div>
                 </div>
@@ -335,9 +332,8 @@ export default function Home() {
       <ProjectTabs tabs={tabs} />
       <footer className="footer">
               <div className="wrap footer-inner">
-                <span>Gimbaled Drone System <i>·</i> ME 423 X2</span>
+                <span>Gimbaled Drone System</span>
                 <span><a href="https://www.siemens.com/" target="_blank" rel="noreferrer">Siemens</a><i>·</i><a href="https://www.stevens.edu/" target="_blank" rel="noreferrer">Stevens Institute of Technology</a></span>
-                <span>Project information subject to team review.</span>
               </div>
             </footer>
     </>

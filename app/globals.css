@@ -2395,3 +2395,63 @@ details.disclosure > summary small {
     transition: none;
   }
 }
+
+/* Permanently visible concept and build materials panels */
+.static-panel {
+  overflow: hidden;
+}
+
+.static-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 62px;
+  padding: 14px 18px;
+}
+
+.static-panel-heading h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.static-panel-heading small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.bom-disclosure .static-panel-heading {
+  min-height: 82px;
+}
+
+.bom-disclosure .static-panel-heading small {
+  color: var(--brand);
+  font: 700 9px "JetBrains Mono", monospace;
+  letter-spacing: .1em;
+}
+
+.bom-disclosure .static-panel-heading h3 {
+  margin-top: 4px;
+  font-size: 16px;
+}
+
+.bom-disclosure .static-panel-heading > span {
+  padding: 7px 9px;
+  border-radius: 8px;
+  background: #f1f3f6;
+  color: var(--muted);
+  font: 700 9px "JetBrains Mono", monospace;
+}
+
+@media (max-width: 520px) {
+  .static-panel-heading {
+    padding: 14px;
+  }
+
+  .concept-disclosure .static-panel-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+}

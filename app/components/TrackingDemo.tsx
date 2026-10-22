@@ -102,14 +102,11 @@ export function TrackingDemo() {
           <div>
             <div className="eyebrow">Live system concept</div>
             <h2>Follow the target. Keep the image steady.</h2>
-            <p className="lead">Explore ground-target tracking. The aerial tracking diagram is temporarily unavailable.</p>
+            <p className="lead">Ground-target tracking.</p>
           </div>
           <div className="tracking-controls" role="group" aria-label="Choose tracking target">
             <button type="button" aria-pressed={mode === "ground"} onClick={() => setMode("ground")}>
               Ground target
-            </button>
-            <button type="button" aria-pressed={false} disabled title="Aerial tracking diagram is temporarily unavailable">
-              Aerial target · temporarily unavailable
             </button>
           </div>
         </div>

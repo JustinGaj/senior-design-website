@@ -22,11 +22,11 @@ export function ConceptChooser({ concepts }: { concepts: Concept[] }) {
         <span>ADVANCED FOR FURTHER EVALUATION</span>
         {concepts.map((item) => <b key={item.n}>{item.name}</b>)}
       </div>
-      <details className="disclosure concept-disclosure">
-        <summary>
-          <span>Explore finalist scores and trade-offs</span>
+      <div className="card static-panel concept-disclosure">
+        <div className="static-panel-heading">
+          <h3>Finalist scores and trade-offs</h3>
           <small>Four concepts advanced for deeper evaluation</small>
-        </summary>
+        </div>
         <div className="disclosure-body">
           <div className="concept-layout">
             <div className="concept-list" role="group" aria-label="Select a finalist concept">
@@ -61,7 +61,7 @@ export function ConceptChooser({ concepts }: { concepts: Concept[] }) {
             </article>
           </div>
         </div>
-      </details>
+      </div>
     </>
   );
 }

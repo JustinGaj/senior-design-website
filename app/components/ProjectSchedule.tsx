@@ -23,7 +23,7 @@ type SchedulePhase = {
 const phases: SchedulePhase[] = [
   {
     id: "1",
-    name: "Milestone #1",
+    name: "Phase 1",
     start: "2026-09-08",
     end: "2026-09-29",
     tasks: [
