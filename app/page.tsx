@@ -105,7 +105,6 @@ const tabs: ProjectTab[] = [
       <header className="hero" id="home">
                 <div className="wrap hero-grid">
                   <div className="hero-copy">
-                    <div className="tag"><i /> SIEMENS</div>
                     <h1>A steadier view<br />from the <em>sky.</em></h1>
                     <p className="hero-lead">
                       A lightweight, stabilized optical tracker for multi-rotor drones—built to find a target,
