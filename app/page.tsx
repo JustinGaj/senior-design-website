@@ -1,15 +1,16 @@
 import { ConceptChooser, type Concept } from "./components/ConceptChooser";
+import { ProjectSchedule } from "./components/ProjectSchedule";
 import { TrackingDemo } from "./components/TrackingDemo";
 import { UpdatesFeed } from "./components/UpdatesFeed";
 import { ProjectTabs, type ProjectTab } from "./components/ProjectTabs";
 
 const team = [
-  { name: "Claire Deatrick", role: "Mechanical Design Lead", focus: "Mechanical design and enclosure.", initials: "CD" },
-  { name: "Ryan Paradine", role: "Hardware Lead", focus: "Electronics and sensor components.", initials: "RP" },
-  { name: "Justin Gajewski", role: "Software Lead", focus: "Computer vision and control logic.", initials: "JG" },
-  { name: "Matthew Hodorowski", role: "Integration Lead", focus: "Hardware and software integration.", initials: "MH" },
-  { name: "Chris Persico", role: "Systems Lead", focus: "System requirements and interactions.", initials: "CP" },
-  { name: "Robert Dominik", role: "Testing Lead", focus: "Test procedures and performance evaluation.", initials: "RD" },
+  { name: "Claire Deatrick", role: "Mechanical Design Lead", focus: "Mechanical design and enclosure.", initials: "CD", linkedIn: "https://www.linkedin.com/in/claire-deatrick-a4749a298/", avatar: "a0" },
+  { name: "Chris Persico", role: "Systems Lead", focus: "System requirements and interactions.", initials: "CP", linkedIn: "https://www.linkedin.com/in/christopher-m-persico/", avatar: "a4" },
+  { name: "Robert Dominik", role: "Testing Lead", focus: "Test procedures and performance evaluation.", initials: "RD", linkedIn: "https://www.linkedin.com/in/r-dominik/", avatar: "a5" },
+  { name: "Ryan Paradine", role: "Hardware Lead", focus: "Electronics and sensor components.", initials: "RP", linkedIn: "https://www.linkedin.com/in/ryan-paradine-73b147388/", avatar: "a1" },
+  { name: "Justin Gajewski", role: "Software Lead", focus: "Computer vision and control logic.", initials: "JG", linkedIn: "https://www.linkedin.com/in/justingaj/", avatar: "a2" },
+  { name: "Matthew Hodorowski", role: "Integration Lead", focus: "Hardware and software integration.", initials: "MH", linkedIn: "https://www.linkedin.com/in/matthew-hodorowski/", avatar: "a3" },
 ];
 
 const concepts: Concept[] = [
@@ -58,6 +59,8 @@ const requirements = [
   ["Camera frame rate", "≥ 20 fps", "20 fps"],
   ["IMU sample rate", "≥ 500 Hz", "500 Hz"],
   ["End-to-end latency", "< 100 ms", "100 ms"],
+  ["Temperature", "—", "60°C"],
+  ["Loiter time", "30 min", "20 min"],
 ] as const;
 
 const milestones = [
@@ -67,15 +70,6 @@ const milestones = [
   ["M4", "Alpha assessment", "Test results and design refinements"],
   ["M5", "Final design review", "Beta prototype assessment"],
   ["M6", "Report & expo", "Final demonstration and project handoff"],
-] as const;
-
-const schedule = [
-  ["Requirements & user needs", 1, 2],
-  ["Concept selection", 1, 3],
-  ["Detailed design & analysis", 2, 4],
-  ["Prototype build & integration", 3, 6],
-  ["Verification & demonstration", 4, 7],
-  ["Final report & expo", 5, 7],
 ] as const;
 
 const billOfMaterials = [
@@ -181,31 +175,23 @@ const tabs: ProjectTab[] = [
                 <div className="wrap mission">
                   <div>
                     <div className="eyebrow">The mission</div>
-                    <h2>Keep the target in frame while the aircraft moves.</h2>
                     <p className="lead">
-                      The team is developing a compact optical tracking payload that can detect and follow ground
-                      or airborne targets while mounted beneath a multi-rotor drone.
-                    </p>
-                    <p className="body-copy">
-                      The project combines an upgraded airframe with a purpose-built gimbal. A useful aerial view
-                      needs to stay stable through vibration, wind, and flight maneuvers while remaining light
-                      enough to fly and clear enough for an operator to trust.
+                      Eagle Eye is a compact optical tracking payload designed to keep ground and aerial targets
+                      in view as a multi-rotor drone moves. By combining vibration isolation, stabilized pointing,
+                      and onboard vision, the project aims to give operators a clear, steady view without adding
+                      unnecessary weight to the aircraft.
                     </p>
                     <a className="text-link" href="https://www.siemens.com/" target="_blank" rel="noreferrer">
                       Project sponsor: Siemens ↗
                     </a>
                   </div>
-                  <div className="pillar-list">
-                    <article className="card pillar"><span className="icon" aria-hidden="true">◎</span><div><h3>Stabilize</h3><p>Reduce vibration and maintain line of sight.</p></div></article>
-                    <article className="card pillar"><span className="icon" aria-hidden="true">⌁</span><div><h3>Track</h3><p>Use onboard vision to follow moving targets.</p></div></article>
-                    <article className="card pillar"><span className="icon" aria-hidden="true">↗</span><div><h3>Integrate</h3><p>Bring aircraft, sensing, compute, and control together.</p></div></article>
-                  </div>
+
                 </div>
               </section>
       
-              <TrackingDemo />
-
               <UpdatesFeed limit={2} />
+
+              <TrackingDemo />
     </>
   ) },
   { id: "team", label: "Team", content: (
@@ -218,10 +204,10 @@ const tabs: ProjectTab[] = [
                     description="An interdisciplinary team covering mechanical, hardware, software, integration, systems, and test."
                   />
                   <div className="team-grid">
-                    {team.map((member, index) => (
+                    {team.map((member) => (
                       <article className="card person" key={member.name}>
-                        <span className={`avatar a${index}`} aria-hidden="true">{member.initials}</span>
-                        <h3>{member.name}</h3>
+                        <span className={`avatar ${member.avatar}`} aria-hidden="true">{member.initials}</span>
+                        <h3><a href={member.linkedIn} target="_blank" rel="noreferrer">{member.name} ↗</a></h3>
                         <div className="role">{member.role}</div>
                         <p>{member.focus}</p>
                       </article>
@@ -272,20 +258,6 @@ const tabs: ProjectTab[] = [
                           ))}
                           <p className="note">Targets are starting engineering goals from the project brief. Confirm final values through testing and sponsor review.</p>
                         </div>
-                        <div className="analysis-stack">
-                          <article className="analysis-card">
-                            <div className="analysis-icon" aria-hidden="true">⌖</div>
-                            <small>VISION & CONTROL</small><h3>Track at camera rate</h3>
-                            <p>Onboard detection feeds a closed-loop pointing controller. Flight telemetry and the IMU support stabilization; manual override remains available.</p>
-                            <div className="mini-flow"><span>Camera</span><i>→</i><span>Detection</span><i>→</i><span>Gimbal</span></div>
-                          </article>
-                          <article className="analysis-card">
-                            <div className="analysis-icon teal-icon" aria-hidden="true">ϟ</div>
-                            <small>FLIGHT CONSTRAINTS</small><h3>Mass, power, heat</h3>
-                            <p>Payload mass and average draw affect endurance. The sealed enclosure must also keep compute hardware below its thermal limit.</p>
-                            <div className="mini-flow"><span>≤ 3 lb</span><i>·</i><span>25 W goal</span><i>·</i><span>&lt; 40°C</span></div>
-                          </article>
-                        </div>
                       </div>
                       <div className="architecture">
                         <div className="architecture-label"><small>PROPOSED SYSTEM ARCHITECTURE</small><span>Design baseline</span></div>
@@ -320,23 +292,14 @@ const tabs: ProjectTab[] = [
                     ))}
                   </div>
                   <details className="disclosure">
-                    <summary><span>View proposed Gantt chart</span><small>Phase spans shown; confirm calendar dates with the team</small></summary>
+                    <summary><span>View Gantt chart</span><small>September–November 2026 project schedule</small></summary>
                     <div className="disclosure-body">
-                      <div className="gantt-scroll">
-                        <div className="gantt">
-                          <div className="gantt-head"><b>Workstream</b>{milestones.map(([id]) => <span key={id}>{id}</span>)}</div>
-                          {schedule.map(([task, start, end]) => (
-                            <div className="gantt-row" key={task}>
-                              <b>{task}</b><div className="gantt-track"><i style={{ gridColumn: `${start} / ${end}` }} /></div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                      <ProjectSchedule />
                     </div>
                   </details>
                   <div className="resource-grid">
                     <details className="resource-card disclosure bom-disclosure">
-                      <summary><span><small>PRELIMINARY BOM</small><b>System components</b></span><span>6 groups</span></summary>
+                      <summary><span><small>PRELIMINARY BOM</small><b>Build materials</b></span><span>6 groups</span></summary>
                       <div className="disclosure-body">
                         <div className="bom-list">
                           {billOfMaterials.map(([group, item, quantity, cost]) => (

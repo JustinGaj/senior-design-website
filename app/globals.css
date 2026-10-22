@@ -315,7 +315,7 @@ h1,h2,h3,p {
 
 .mission {
   display: grid;
-  grid-template-columns: 1.08fr .92fr;
+  grid-template-columns: 1fr;
   gap: 68px;
   align-items: center;
 }
@@ -892,7 +892,7 @@ h1,h2,h3,p {
 
 .engineering-grid {
   display: grid;
-  grid-template-columns: 1.1fr .9fr;
+  grid-template-columns: 1fr;
   gap: 18px;
 }
 
@@ -1092,13 +1092,15 @@ h1,h2,h3,p {
 }
 
 .gantt {
-  min-width: 700px;
+  --gantt-label-width: 310px;
+  min-width: 1160px;
   padding: 15px 18px;
 }
 
-.gantt-head,.gantt-row {
+.gantt-head,
+.gantt-row {
   display: grid;
-  grid-template-columns: 180px repeat(6, minmax(54px, 1fr));
+  grid-template-columns: var(--gantt-label-width) minmax(0, 1fr);
   align-items: center;
   gap: 4px;
 }
@@ -1117,60 +1119,104 @@ h1,h2,h3,p {
   letter-spacing: .08em;
 }
 
+.gantt-weeks {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+}
+
+.gantt-body {
+  position: relative;
+}
+
 .gantt-row {
-  min-height: 35px;
+  min-height: 48px;
   border-bottom: 1px solid #edf0f3;
 }
 
-.gantt-row:last-child {
-  border-bottom: 0;
-}
-
-.gantt-row>b {
+.gantt-row > b {
+  padding-block: 7px;
   font-size: 10px;
 }
 
-.gantt-track {
-  grid-column: 2/-1;
-  grid-row: 1;
-  display: grid;
-  grid-template-columns: repeat(6, minmax(54px, 1fr));
-  gap: 4px;
-  align-items: center;
-  height: 100%;
-  pointer-events: none;
+.gantt-row small {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 500;
 }
 
-.gantt-row> b {
-  grid-column: 1;
-  grid-row: 1;
+.gantt-phase > b {
+  color: var(--brand);
+}
+
+.gantt-track {
+  position: relative;
+  height: 100%;
+  min-height: 48px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--line) 0,
+    var(--line) 1px,
+    transparent 1px,
+    transparent calc(100% / 13)
+  );
 }
 
 .gantt-track i {
+  position: absolute;
+  top: 19px;
   height: 11px;
   border-radius: 99px;
   background: linear-gradient(90deg, var(--brand), #ff7b8c);
   box-shadow: 0 2px 5px #a3263825;
 }
 
-@media(max-width:680px) {
+.gantt-track .phase-bar {
+  top: 22px;
+  height: 5px;
+  box-shadow: none;
+}
 
+.gantt-track .phase-1 {
+  background: var(--gold);
+}
+
+.gantt-track .phase-2 {
+  background: var(--good);
+}
+
+.gantt-marker-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--gantt-label-width) + 4px);
+  right: 0;
+  pointer-events: none;
+}
+
+.gantt-today {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 2px solid var(--brand);
+}
+
+.gantt-today span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2px 6px;
+  border-radius: 0 4px 4px 0;
+  background: var(--brand);
+  color: white;
+  font: 700 9px "JetBrains Mono", monospace;
+}
+
+@media (max-width: 680px) {
   .gantt-label {
     align-items: flex-start;
     flex-direction: column;
     gap: 4px;
-  }
-
-  .gantt {
-    min-width: 650px;
-  }
-
-  .gantt-head,.gantt-row {
-    grid-template-columns: 155px repeat(6, minmax(48px, 1fr));
-  }
-
-  .gantt-track {
-    grid-template-columns: repeat(6, minmax(48px, 1fr));
   }
 }
 
@@ -2030,6 +2076,11 @@ h1,h2,h3,p {
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.tracking-controls button:disabled {
+  cursor: not-allowed;
+  opacity: .55;
 }
 
 .tracking-controls button[aria-pressed="true"] {

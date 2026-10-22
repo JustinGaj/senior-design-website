@@ -49,7 +49,7 @@ export function ProjectTabs({ tabs }: { tabs: ProjectTab[] }) {
       <header className="project-nav">
         <a className="brand" href="#overview" onClick={() => selectTab("overview")}>
           <span className="brand-mark"><i /></span>
-          GIMBALED<span>DRONE</span>
+          EAGLE<span>EYE</span>
         </a>
         <div className="project-tabs" role="tablist" aria-label="Project sections">
           {tabs.map((tab, index) => (
