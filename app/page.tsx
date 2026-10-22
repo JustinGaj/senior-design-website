@@ -68,15 +68,6 @@ const requirements = [
   ["Loiter time", "30 min", "20 min"],
 ] as const;
 
-const milestones = [
-  ["M1", "Design proposal", "Mission, needs, requirements, and concepts"],
-  ["M2", "Preliminary design review", "Select a concept; document design and analysis"],
-  ["M3", "Design & cost review", "Alpha prototype demonstration"],
-  ["M4", "Alpha assessment", "Test results and design refinements"],
-  ["M5", "Final design review", "Beta prototype assessment"],
-  ["M6", "Report & expo", "Final demonstration and project handoff"],
-] as const;
-
 const billOfMaterials = [
   ["Compute", "Jetson Orin Nano", "1", "TBD"],
   ["Camera", "Long-range optical camera", "1", "TBD"],
@@ -295,14 +286,6 @@ const tabs: ProjectTab[] = [
                     title="From design review to flight demo."
                     description="Project milestones, detailed schedule, build materials, and budget."
                   />
-                  <div className="timeline">
-                    {milestones.map(([id, title, description], index) => (
-                      <article className="milestone" key={id}>
-                        <div className="mile-mark"><span>{id}</span>{index < milestones.length - 1 && <i />}</div>
-                        <div><small>PHASE {String(index + 1).padStart(2, "0")}</small><h3>{title}</h3><p>{description}</p></div>
-                      </article>
-                    ))}
-                  </div>
                   <details className="disclosure">
                     <summary><span>View Gantt chart</span><small>September–November 2026 project schedule</small></summary>
                     <div className="disclosure-body">
