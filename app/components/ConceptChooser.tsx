@@ -69,9 +69,9 @@ export function ConceptChooser({ concepts }: { concepts: Concept[] }) {
                 <div>
                   <small>SELECTION SUMMARY</small>
                   <h3>{concept.name}</h3>
-                  <p><b>Strength:</b> {concept.strength} <b>Trade-off:</b> {concept.tradeoff}</p>
+                  <p><b>Strength:</b> {concept.strength}</p>
+                  <p><b>Trade-off:</b> {concept.tradeoff}</p>
                 </div>
-                <div className="score-tags"><span>Cost</span><span>Range</span><span>Power</span><span>Accuracy</span><span>Safety</span></div>
               </div>
             </article>
           </div>

@@ -809,28 +809,16 @@ h1,h2,h3,p {
   margin: 4px 0;
 }
 
+.concept-description p + p {
+  margin-top: 8px;
+}
+
 .concept-description p {
   font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
   margin: 0;
   max-width: 455px;
-}
-
-.score-tags {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 5px;
-  min-width: 105px;
-}
-
-.score-tags span {
-  font-size: 9px;
-  color: var(--brand);
-  background: #fbeaed;
-  padding: 5px 8px;
-  border-radius: 99px;
 }
 
 .finalist-row {
@@ -1088,6 +1076,12 @@ h1,h2,h3,p {
 .gantt-weeks {
   display: grid;
   grid-template-columns: repeat(13, 1fr);
+}
+
+.gantt-weeks small {
+  display: block;
+  font: inherit;
+  line-height: 1.5;
 }
 
 .gantt-body {
@@ -1631,10 +1625,6 @@ h1,h2,h3,p {
   .concept-description {
     align-items: start;
     flex-direction: column;
-  }
-
-  .score-tags {
-    justify-content: flex-start;
   }
 
   .team-grid {

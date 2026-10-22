@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 
 export type ProjectTab = {
   id: string;
@@ -23,6 +23,10 @@ export function ProjectTabs({ tabs }: { tabs: ProjectTab[] }) {
     return () => window.removeEventListener("hashchange", syncFromHash);
   }, [tabs]);
 
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [activeId]);
+
   const selectTab = (id: string) => {
     setActiveId(id);
     window.history.replaceState(null, "", `#${id}`);
@@ -39,7 +43,7 @@ export function ProjectTabs({ tabs }: { tabs: ProjectTab[] }) {
     event.preventDefault();
     const nextTab = tabs[nextIndex];
     selectTab(nextTab.id);
-    tabRefs.current[nextIndex]?.focus();
+    tabRefs.current[nextIndex]?.focus({ preventScroll: true });
   };
 
   const activeTab = tabs.find((tab) => tab.id === activeId) ?? tabs[0];

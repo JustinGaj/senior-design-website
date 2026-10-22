@@ -18,8 +18,8 @@ type SchedulePhase = {
   tasks: ScheduleTask[];
 };
 
-// Phase dates are printed in the supplied chart. Individual task dates are
-// transcribed from its bar positions; replace them with an export when available.
+// Phase dates are printed in the reference chart. Task dates are inferred from
+// its bars, including the half-day offsets visible in three Phase 1 tasks.
 const phases: SchedulePhase[] = [
   {
     id: "1",
@@ -31,11 +31,11 @@ const phases: SchedulePhase[] = [
       { id: "1.2", name: "Perform Background Research", start: "2026-09-08", end: "2026-09-10", status: "Done" },
       { id: "1.3", name: "Generate Concepts", start: "2026-09-10", end: "2026-09-12", status: "Done" },
       { id: "1.4", name: "Identify Needs and Specifications", start: "2026-09-10", end: "2026-09-15", status: "Done" },
-      { id: "1.5", name: "Write Progress Report", start: "2026-09-15", end: "2026-09-18", status: "Done" },
+      { id: "1.5", name: "Write Progress Report", start: "2026-09-14T12:00:00Z", end: "2026-09-17T12:00:00Z", status: "Done" },
       { id: "1.6", name: "Perform Concept Screening", start: "2026-09-16", end: "2026-09-20", status: "Done" },
       { id: "1.7", name: "Write Mission Statement", start: "2026-09-16", end: "2026-09-20", status: "Done" },
-      { id: "1.8", name: "Finish Phase 1 Report", start: "2026-09-16", end: "2026-09-28", status: "In progress" },
-      { id: "1.9", name: "Finish Phase 1 Presentation", start: "2026-09-24", end: "2026-09-29", status: "In progress" },
+      { id: "1.8", name: "Finish Phase 1 Report", start: "2026-09-15T12:00:00Z", end: "2026-09-27T12:00:00Z", status: "In progress" },
+      { id: "1.9", name: "Finish Phase 1 Presentation", start: "2026-09-23T12:00:00Z", end: "2026-09-29", status: "In progress" },
     ],
   },
   {
@@ -65,7 +65,12 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 function timestamp(date: string) {
-  return Date.parse(date + "T00:00:00Z");
+  return Date.parse(date.includes("T") ? date : date + "T00:00:00Z");
+}
+
+function dateLabel(date: string) {
+  const value = new Date(timestamp(date));
+  return dateFormatter.format(value) + (value.getUTCHours() === 12 ? " noon" : "");
 }
 
 function position(date: number) {
@@ -81,7 +86,7 @@ function barStyle(start: string, end: string) {
 
 const weeks = Array.from({ length: 13 }, (_, index) => {
   const start = chartStart + index * 7 * dayMs;
-  return { start, label: dateFormatter.format(start) };
+  return { start, label: dateFormatter.format(start), endLabel: dateFormatter.format(start + 6 * dayMs) };
 });
 
 export function ProjectSchedule() {
@@ -115,7 +120,7 @@ export function ProjectSchedule() {
           <div className="gantt-head">
             <b>Task name · Status</b>
             <div className="gantt-weeks">
-              {weeks.map((week) => <span key={week.start}>{week.label}</span>)}
+              {weeks.map((week) => <span key={week.start}>{week.label}<small>– {week.endLabel}</small></span>)}
             </div>
           </div>
           <div className="gantt-body">
@@ -129,13 +134,13 @@ export function ProjectSchedule() {
                 </div>
                 {phase.tasks.map((task) => (
                   <div className="gantt-row" key={task.id}>
-                    <b>{task.id} · {task.name}<small>{task.status}</small></b>
+                    <b>{task.id} · {task.name}<small>{dateLabel(task.start)} – {dateLabel(task.end)} · {task.status}</small></b>
                     <div className="gantt-track">
                       <i
                         style={barStyle(task.start, task.end)}
-                        title={task.name + ": " + task.start + " – " + task.end + " · " + task.status}
+                        title={task.name + ": " + dateLabel(task.start) + " – " + dateLabel(task.end) + " · " + task.status}
                         role="img"
-                        aria-label={task.name + ": " + task.start + " to " + task.end + "; " + task.status}
+                        aria-label={task.name + ": " + dateLabel(task.start) + " to " + dateLabel(task.end) + "; " + task.status}
                       />
                     </div>
                   </div>
