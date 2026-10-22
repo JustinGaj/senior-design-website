@@ -11,10 +11,12 @@ type Update = {
   href?: string;
 };
 
-export function UpdatesFeed({ limit }: { limit?: number } = {}) {
+export function UpdatesFeed({ limit, hidePlaceholders = false }: { limit?: number; hidePlaceholders?: boolean } = {}) {
   const [updates, setUpdates] = useState<Update[]>([]);
   const [source, setSource] = useState("local");
-  const visibleUpdates = limit ? updates.slice(0, limit) : updates;
+  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  const publishedUpdates = hidePlaceholders && source === "local" ? [] : updates;
+  const visibleUpdates = limit ? publishedUpdates.slice(0, limit) : publishedUpdates;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -26,9 +28,13 @@ export function UpdatesFeed({ limit }: { limit?: number } = {}) {
       .then((data: { updates?: Update[]; source?: string }) => {
         setUpdates(data.updates ?? []);
         setSource(data.source ?? "local");
+        setStatus("ready");
       })
-      .catch((error: unknown) => {
-        if (error instanceof Error && error.name !== "AbortError") setUpdates([]);
+      .catch(() => {
+        if (!controller.signal.aborted) {
+          setUpdates([]);
+          setStatus("error");
+        }
       });
     return () => controller.abort();
   }, []);
@@ -65,14 +71,14 @@ export function UpdatesFeed({ limit }: { limit?: number } = {}) {
         ) : (
           <div className="updates-empty">
             <div className="empty-symbol" aria-hidden="true">↻</div>
-            <h3>Project updates are loading.</h3>
+            <h3>{status === "loading" ? "Loading project updates…" : status === "error" ? "Project updates are temporarily unavailable." : "No new updates from the team yet."}</h3>
             <p>New notes will appear here as the team shares progress.</p>
           </div>
         )}
         <div className="feed-note">
           Updates source: {source === "n8n" ? "project management feed" : "project team"} <span>·</span> Maintained every two weeks
         </div>
-        {limit && (
+        {limit && visibleUpdates.length > 0 && (
           <a className="button ghost updates-more" href="#updates">
             View all project updates <span aria-hidden="true">↗</span>
           </a>
