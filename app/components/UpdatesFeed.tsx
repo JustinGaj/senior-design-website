@@ -1,8 +1,10 @@
-import { mockUpdates } from "../data/mock-updates";
+import { projectUpdates } from "../data/project-updates";
 
 export function UpdatesFeed({ limit }: { limit?: number } = {}) {
   const isPreview = limit !== undefined;
-  const visibleUpdates = isPreview ? mockUpdates.slice(0, limit) : mockUpdates;
+  const visibleUpdates = isPreview
+    ? projectUpdates.slice(0, limit)
+    : projectUpdates;
 
   return (
     <section id="updates" className="dark-section updates-section">
@@ -17,7 +19,7 @@ export function UpdatesFeed({ limit }: { limit?: number } = {}) {
             </p>
           </div>
           <div className="cadence">
-            <span className="pulse" /> SAMPLE UPDATES
+            <span className="pulse" /> BI-WEEKLY UPDATES
           </div>
         </div>
         <div
@@ -37,7 +39,16 @@ export function UpdatesFeed({ limit }: { limit?: number } = {}) {
                 </b>
               </div>
               <div className="update-copy">
-                <small>Temporary sample entry</small>
+                <small>
+                  <time dateTime={update.date}>
+                    {new Date(update.date).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                      timeZone: "UTC",
+                    })}
+                  </time>
+                </small>
                 <h3>{update.title}</h3>
                 <p>{update.summary}</p>
                 {!isPreview && (
@@ -45,6 +56,9 @@ export function UpdatesFeed({ limit }: { limit?: number } = {}) {
                     {update.paragraphs.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
+                    <a href={update.href} target="_blank" rel="noreferrer">
+                      View in Plane ↗
+                    </a>
                   </div>
                 )}
               </div>
@@ -52,8 +66,8 @@ export function UpdatesFeed({ limit }: { limit?: number } = {}) {
           ))}
         </div>
         <div className="feed-note">
-          Temporary sample content for review <span>·</span> Not published team
-          progress reports
+          Updates from the project team <span>·</span> Activity recorded in
+          Plane
         </div>
         {isPreview && (
           <a className="button ghost updates-more" href="#updates">
