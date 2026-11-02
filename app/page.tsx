@@ -184,7 +184,7 @@ const tabs: ProjectTab[] = [
                 </div>
               </section>
       
-              <UpdatesFeed limit={1} />
+              <UpdatesFeed limit={2} />
 
               <TrackingDemo />
     </>

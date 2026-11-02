@@ -4,8 +4,8 @@ Responsive Next.js App Router website for the Stevens engineering project.
 
 ## Project log
 
-Overview shows a short summary of the latest update, and Updates provides the
-fuller entries. The current posts are curated from Plane activity for October
+Overview shows short summaries of recent updates, and Updates provides the fuller
+entries. The current posts are curated from Plane activity for October
 18–31, 2026, with activity dates and links to their source work items (PMGT-16 and
 PMGT-5). Edit the content in `app/data/project-updates.ts`.
 
