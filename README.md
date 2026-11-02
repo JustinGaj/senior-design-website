@@ -1,39 +1,49 @@
-# Gimbaled Drone System
+# Eagle Eye
 
-Responsive Next.js App Router website for the Stevens engineering project.
+Responsive Next.js project website with an SQLite-backed project log.
 
-## Run locally
+## Local development
 
-```bash
-npm install
+Use Node.js **24.13 or newer**.
+
+```sh
+npm ci
+cp .env.example .env.local
+npm run db:init
+npm run admin:create -- yourname
 npm run dev
 ```
 
-## Project updates webhook
+On PowerShell, `Copy-Item .env.example .env.local` also works. Administrator creation prompts for a hidden password. Open `/admin/login` to manage posts.
 
-The `/api/updates` route serves curated local entries until the n8n workflow is configured. Set `N8N_UPDATES_WEBHOOK_URL` in the deployment environment (server-side only). The webhook should respond with JSON shaped like:
+## Project updates
 
-```json
-{
-  "updates": [
-    {
-      "date": "2026-10-27",
-      "title": "Concept review",
-      "category": "Design",
-      "summary": "A concise update for the project blog.",
-      "image": "concept",
-      "href": "https://example.com/project-ticket"
-    }
-  ]
-}
+The Overview preview and Updates page read published posts from `GET /api/updates`. Full entries have permanent `/updates/POST_ID` URLs. The authenticated `POST /api/updates` endpoint accepts biweekly posts and supporting Plane activity from n8n.
+
+Posts, original generations, revisions, evidence, and administrator accounts persist in SQLite. There are no placeholder posts or default passwords. Retries never overwrite an existing reporting period or a team's edits.
+
+See **[backend setup and operations](docs/backend.md)** for the complete n8n payload, account management, publishing behavior, server configuration, migrations, online backups, and recovery.
+
+## Deployment
+
+Run this as a Next.js Node server, not an exported static site. Store the live database and environment secrets outside the directory replaced by deployments. Configure `DATABASE_PATH`, `APP_ORIGIN`, and `UPDATES_INGEST_TOKEN` on the server; keep runtime files and secrets out of Git.
+
+```sh
+npm ci
+npm run db:init
+npm run build
+npm start
 ```
 
-The page requests this endpoint on load. The route falls back to local entries if the webhook is absent or unavailable. Keep integrations read-only and do not place webhook secrets in client-side environment variables.
+The `dev` and `build` scripts use Webpack for compatibility with the reported Windows native-binding issue.
 
-## Content editing
+## Checks
 
-Project descriptions, team roles, design alternatives, engineering targets, planning milestones, BOM rows, and local update entries are in `app/page.tsx` and `app/api/updates/route.ts`. Verify engineering targets, budget values, milestones, and update dates with the team before publishing them as current.
+```sh
+npm run check
+npm test
+npm run build
+npm run test:integration
+```
 
-## Bundler
-
-The `dev` and `build` scripts use Next.js Webpack mode for compatibility with Windows environments where Turbopack native bindings are unavailable.
+Integration checks start an isolated production server with a temporary database and generated test credentials. They do not publish to the live website or use real credentials.
