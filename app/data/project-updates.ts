@@ -10,6 +10,7 @@ type ProjectUpdate = {
 };
 
 // Curated from Plane activity for October 18–31, 2026.
+// Subsystem analysis completion was confirmed directly by the team.
 // Dates reflect recorded project activity, not the website deployment date.
 // PMGT-16: created and assigned to all six members on October 29; In Progress.
 // PMGT-5: changed from In Progress to Done on October 29.
@@ -20,11 +21,11 @@ export const projectUpdates: ProjectUpdate[] = [
     title: "Phase 2 presentation preparation underway",
     category: "Project planning",
     summary:
-      "Presentation preparation is in progress, with a November 3 target and a focus on the analysis behind our design choices.",
+      "Individual subsystem analyses are complete, and the team is preparing the findings for the Phase 2 presentation targeted for November 3.",
     image: "concept",
     paragraphs: [
       "The Phase 2 presentation task was opened on October 29 and assigned to all six team members. It is now part of the Phase 2 project-management module, bringing the team together for the next design review.",
-      "The review requirements cover performance, physical constraints, cost, and component choices. The presentation will need to connect technical analysis to design decisions, document assumptions, and explain validation through appropriate calculations, diagrams, simulations, or experiments.",
+      "Our individual subsystem analyses are complete, providing a foundation for the next design review. The review requirements cover performance, physical constraints, cost, and component choices. The presentation will need to connect technical analysis to design decisions, document assumptions, and explain validation through appropriate calculations, diagrams, simulations, or experiments.",
     ],
     href: "https://plane.stevensweb.org/siemens-gimbal-optical-sensor-project/browse/PMGT-16/",
   },
