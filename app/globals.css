@@ -1391,8 +1391,30 @@ h1,h2,h3,p {
 
 .updates-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+}
+
+.updates-grid-preview {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.updates-grid-preview .update-card {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(0, 3fr);
+}
+
+.updates-grid-preview .update-art {
+  height: auto;
+  min-height: 155px;
+}
+
+.update-detail {
+  margin-top: 12px;
+}
+
+.update-detail p + p {
+  margin-top: 12px;
 }
 
 .update-card {
@@ -1944,6 +1966,15 @@ h1,h2,h3,p {
 
   .updates-grid {
     grid-template-columns: 1fr;
+  }
+
+  .updates-grid-preview .update-card {
+    grid-template-columns: 1fr;
+  }
+
+  .updates-grid-preview .update-art {
+    height: 135px;
+    min-height: 0;
   }
 
   .update-art {
