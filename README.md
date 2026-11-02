@@ -2,6 +2,17 @@
 
 Responsive Next.js App Router website for the Stevens engineering project.
 
+## Temporary update preview (`mock-updates` branch)
+
+This branch shows one short sample entry on Overview and three expanded entries
+on Updates. All entries are labeled as temporary sample content, with no invented
+publication dates or claims of completed work. Edit the copy in
+`app/data/mock-updates.ts`.
+
+The sample feed renders directly from that file, so it works without credentials,
+n8n, or a database. The existing API route is unchanged. This is a temporary review
+version; restore the real feed integration when switching to live updates.
+
 ## Run locally
 
 ```bash
