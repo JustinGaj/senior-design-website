@@ -18,11 +18,11 @@ On PowerShell, `Copy-Item .env.example .env.local` also works. Administrator cre
 
 ## Project updates
 
-The Overview preview and Updates page read published posts from `GET /api/updates`. Full entries have permanent `/updates/POST_ID` URLs. The authenticated `POST /api/updates` endpoint accepts biweekly posts and supporting Plane activity from n8n.
+The Overview shows two short summaries and Updates lists the full project log. Both read new published posts from `GET /api/updates`. New posts have permanent `/updates/POST_ID` URLs. The two original October entries remain in the feed as a curated archive.
 
 Posts, original generations, revisions, evidence, and administrator accounts persist in SQLite. There are no placeholder posts or default passwords. Retries never overwrite an existing reporting period or a team's edits.
 
-See **[backend setup and operations](docs/backend.md)** for the complete n8n payload, account management, publishing behavior, server configuration, migrations, online backups, and recovery.
+See **[n8n workflow and local testing](docs/n8n.md)** for the importable workflows, a credential-free fixture, and the production handoff. See **[backend setup and operations](docs/backend.md)** for the publishing API, administrator accounts, server configuration, and backups.
 
 ## Deployment
 

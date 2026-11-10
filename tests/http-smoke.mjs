@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { mkdtempSync, rmSync, readdirSync } from "node:fs";
+import { mkdtempSync, rmSync, readdirSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, dirname, resolve } from "node:path";
 import { createServer } from "node:net";
@@ -8,6 +8,13 @@ import { randomBytes } from "node:crypto";
 import { setTimeout as delay } from "node:timers/promises";
 import { Store } from "../lib/db/store.ts";
 import { hashPassword, digest } from "../lib/auth/crypto.ts";
+
+const workflow = JSON.parse(
+  readFileSync(new URL("../n8n/local-publish-test.json", import.meta.url), "utf8"),
+);
+const payload = JSON.parse(
+  workflow.nodes.find((node) => node.name === "Fixture post").parameters.jsonOutput,
+);
 
 const folder = mkdtempSync(join(tmpdir(), "eagle-eye-http-"));
 const dbPath = join(folder, "site.sqlite");
@@ -58,27 +65,6 @@ child.stderr.on("data", (chunk) => {
 child.on("error", (error) => {
   logs += error.message;
 });
-
-const payload = {
-  periodStart: "2026-10-18",
-  periodEnd: "2026-11-01",
-  title: "Integration test update",
-  summary: "A recorded test task moved to Done.",
-  body: "Public body.\n\n<script>alert('not executed')</script>",
-  category: "Engineering",
-  image: "engineering",
-  activities: [
-    {
-      id: "private-activity-id",
-      workItemId: "EE-TEST",
-      createdAt: "2026-10-25T15:00:00Z",
-      field: "state",
-      oldValue: "In progress",
-      newValue: "Done",
-      comment: "Private supporting evidence",
-    },
-  ],
-};
 
 async function request(path, method = "GET", body, headers = {}) {
   return fetch(base + path, {

@@ -16,7 +16,7 @@ npm run dev
 
 On PowerShell, use `Copy-Item .env.example .env.local` instead of `cp` if preferred. The account command prompts twice for a hidden password of 12–128 characters. No default accounts are shipped, and passwords are stored as salted scrypt hashes. Create an individual account for each editor.
 
-Open `/admin/login` and sign in. The public Overview and Updates sections show an empty state until the first post is submitted. There are no seed posts. A published post has a full-text page at `/updates/POST_ID`.
+Open `/admin/login` and sign in. The public feed includes two archived October entries from the repository. New posts are stored in SQLite and appear before the archive. The archive does not appear in the editor. A published database post has a full-text page at `/updates/POST_ID`.
 
 The application and CLI commands read `.env.local`; system environment variables can also supply configuration. Run CLI commands from the repository root, using the same database environment as the running application.
 
@@ -92,7 +92,7 @@ A password reset revokes that user's sessions. The last command revokes all sess
 
 ## n8n submission contract
 
-The scheduled n8n workflow is a separate setup step. This repository provides its publishing endpoint; it does not run a schedule or call Plane/AI services itself.
+The [n8n workflow guide](n8n.md) provides the scheduled workflow and local smoke workflow. n8n calls the website endpoint. The website serves the saved posts from SQLite.
 
 Send one request per reporting period:
 
@@ -143,7 +143,7 @@ Total request size is capped at 1 MiB, including all evidence. Fetch all pages o
 | `409`                   | Period overlaps a different existing period. Inspect the dates; do not shift them to force publication.                |
 | `503`                   | Publishing is unconfigured or temporarily unavailable. Check configuration and retry transient failures with backoff.  |
 
-Use a Header Auth credential in n8n for the Authorization header. Do not use administrator login credentials for ingestion. The response includes the post ID, whether it was created, current version, visibility, and whether it was manually edited. `GET /api/updates` returns only published card data and links to public detail pages. It never exposes the submitted evidence or revisions.
+Use a dedicated Bearer Auth credential in n8n with the raw publishing token. The response includes the post ID, whether it was created, current version, visibility, and whether it was manually edited. `GET /api/updates` returns only published database card data and links to public detail pages. It never exposes the submitted evidence or revisions.
 
 ## Backups and recovery
 
