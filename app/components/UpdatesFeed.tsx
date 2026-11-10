@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { projectUpdates } from "../data/project-updates";
 
-type PublishedUpdate = Omit<(typeof projectUpdates)[number], "paragraphs" | "href"> & {
+type PublishedUpdate = Omit<(typeof projectUpdates)[number], "paragraphs"> & {
   url: string;
 };
 
@@ -82,9 +82,6 @@ export function UpdatesFeed({ limit }: { limit?: number } = {}) {
                     {update.paragraphs.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
-                    <a href={update.href} target="_blank" rel="noreferrer">
-                      View in Plane ↗
-                    </a>
                   </div>
                 )}
               </div>
@@ -92,8 +89,7 @@ export function UpdatesFeed({ limit }: { limit?: number } = {}) {
           ))}
         </div>
         <div className="feed-note">
-          Updates from the project team <span>·</span> Activity recorded in
-          Plane
+          Updates from the project team
         </div>
         {isPreview && (
           <a className="button ghost updates-more" href="#updates">

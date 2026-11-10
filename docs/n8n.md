@@ -1,6 +1,6 @@
 # Publish biweekly project updates with n8n
 
-The website receives a JSON POST at `/api/updates`. n8n uses a Schedule Trigger and an outgoing HTTP Request node. Plane supplies work items and their recorded history via its read API.
+The website receives a JSON POST at `/api/updates`. n8n uses a Schedule Trigger and an outgoing HTTP Request node. Plane supplies work items and their recorded history via its read API. Plane access is limited to the project team. Public updates contain the full write-up on Eagle Eye, while authenticated editors can see the supporting evidence.
 
 ## How a post is made
 

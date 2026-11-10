@@ -15,6 +15,9 @@ const workflow = JSON.parse(
 const payload = JSON.parse(
   workflow.nodes.find((node) => node.name === "Fixture post").parameters.jsonOutput,
 );
+const planeLink = "https://plane.stevensweb.org/browse/EE-TEST/";
+payload.href = planeLink;
+payload.activities[0].url = planeLink;
 
 const folder = mkdtempSync(join(tmpdir(), "eagle-eye-http-"));
 const dbPath = join(folder, "site.sqlite");
@@ -137,11 +140,13 @@ try {
   const publicFeed = await (await request("/api/updates")).json();
   assert.equal(publicFeed.updates.length, 1);
   assert(!JSON.stringify(publicFeed).includes("Private supporting evidence"));
+  assert(!JSON.stringify(publicFeed).includes(planeLink));
   assert(!JSON.stringify(publicFeed).includes("originalGeneratedContent"));
   let publicPage = await (await request("/updates/" + created.id)).text();
   assert(publicPage.includes("Public body."));
   assert(publicPage.includes("&lt;script&gt;"));
   assert(!publicPage.includes("Private supporting evidence"));
+  assert(!publicPage.includes(planeLink));
   assert.equal(
     (await request("/api/admin/posts/" + created.id, "PATCH", {})).status,
     401,
@@ -215,6 +220,7 @@ try {
   assert.equal(detail.revisions.length, 2);
   assert.equal(detail.originalGeneratedContent.title, payload.title);
   assert.equal(detail.activities[0].comment, "Private supporting evidence");
+  assert.equal(detail.activities[0].url, planeLink);
   assert.equal(
     (await request(editPath, "PATCH", edit, adminHeaders)).status,
     409,
@@ -238,13 +244,14 @@ try {
   const republished = await request(
     editPath,
     "PATCH",
-    { ...edit, status: "published", version: 2 },
+    { ...edit, status: "published", version: 2, href: "https://example.com/project" },
     adminHeaders,
   );
   assert.equal(republished.status, 200);
   assert.equal(store.detail(created.id).revisions.length, 3);
   publicPage = await (await request("/updates/" + created.id)).text();
   assert(publicPage.includes("Manually corrected content"));
+  assert(publicPage.includes('href="https://example.com/project"'));
   assert.equal(
     (await request("/api/admin/logout", "POST", undefined, adminHeaders))
       .status,

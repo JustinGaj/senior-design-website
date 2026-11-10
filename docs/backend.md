@@ -67,7 +67,7 @@ Versioned migrations live in `lib/db/schema.ts`. `db:init` applies pending migra
 
 ## Editing and publishing
 
-The administrator list includes both published and unpublished posts. Open a post, edit its title, summary, body, category, illustration, related link, or visibility, then select **Save changes**.
+The administrator list includes both published and unpublished posts. Open a post, edit its title, summary, body, category, illustration, related link, or visibility, then select **Save changes**. Use publicly accessible URLs for related links. The public article hides links to the team's Plane instance.
 
 - Unpublished posts disappear from the feed and return 404 on their public URL.
 - Each save creates a revision with the editor's username, timestamp, and full content snapshot.

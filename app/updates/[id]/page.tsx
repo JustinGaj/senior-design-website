@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getStore } from "../../../lib/db/store.ts";
+import { publicUpdateLink } from "../../../lib/updates/public-link.ts";
 import "./post.css";
 
 export const runtime = "nodejs";
@@ -20,6 +21,7 @@ export default async function UpdatePage({ params }: Props) {
   const { id } = await params;
   const post = getStore().getPost(id, true);
   if (!post) notFound();
+  const relatedLink = publicUpdateLink(post.href);
   const periodDates = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "short",
@@ -56,10 +58,10 @@ export default async function UpdatePage({ params }: Props) {
           </p>
           <p className="lead">{post.summary}</p>
           <div className="post-body">{post.body}</div>
-          {post.href && (
+          {relatedLink && (
             <a
               className="text-link"
-              href={post.href}
+              href={relatedLink}
               target="_blank"
               rel="noreferrer"
             >
