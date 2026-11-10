@@ -6,7 +6,6 @@ type ProjectUpdate = {
   summary: string;
   image: "engineering" | "concept" | "flight";
   paragraphs: string[];
-  href: string;
 };
 
 // Curated from Plane activity for October 18–31, 2026.
@@ -27,7 +26,6 @@ export const projectUpdates: ProjectUpdate[] = [
       "The Phase 2 presentation task was opened on October 29 and assigned to all six team members. It is now part of the Phase 2 project-management module, bringing the team together for the next design review.",
       "Our individual subsystem analyses are complete, providing a foundation for the next design review. The review requirements cover performance, physical constraints, cost, and component choices. The presentation will need to connect technical analysis to design decisions, document assumptions, and explain validation through appropriate calculations, diagrams, simulations, or experiments.",
     ],
-    href: "https://plane.stevensweb.org/siemens-gimbal-optical-sensor-project/browse/PMGT-16/",
   },
   {
     id: "component-recovery",
@@ -41,6 +39,5 @@ export const projectUpdates: ProjectUpdate[] = [
       "On October 29, the team moved the component-recovery task from In Progress to Done. The task addressed locating parts from the previous year's disassembled system, with the camera identified as the highest-priority component.",
       "This closes the recovery work item alongside ongoing preparation for the Phase 2 review. The tracker keeps the completed task and its history available as the team documents the system's components and design decisions.",
     ],
-    href: "https://plane.stevensweb.org/siemens-gimbal-optical-sensor-project/browse/PMGT-5/",
   },
 ];

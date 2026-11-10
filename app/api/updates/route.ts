@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { publicUpdateLink } from "../../../lib/updates/public-link";
 
 type ProjectUpdate = { date?: string; title: string; category: string; summary: string; image: "engineering" | "concept" | "flight"; href?: string };
 
@@ -18,7 +19,7 @@ function normalizeUpdates(payload: unknown): ProjectUpdate[] | null {
     const item = value as Record<string, unknown>;
     if (typeof item.title !== "string" || typeof item.summary !== "string") continue;
     const date = typeof item.date === "string" && !Number.isNaN(Date.parse(item.date)) ? item.date.slice(0, 40) : undefined;
-    const href = typeof item.href === "string" && /^https?:\/\//i.test(item.href) ? item.href.slice(0, 2048) : undefined;
+    const href = typeof item.href === "string" ? publicUpdateLink(item.href.slice(0, 2048)) : undefined;
     const image = item.image === "concept" || item.image === "flight" ? item.image : "engineering";
     rows.push({
       title: item.title.slice(0, 140),
