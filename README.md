@@ -1,50 +1,49 @@
-# Gimbaled Drone System
+# Eagle Eye
 
-Responsive Next.js App Router website for the Stevens engineering project.
+Responsive Next.js project website with an SQLite-backed project log.
 
-## Project log
+## Local development
 
-Overview shows short summaries of recent updates, and Updates provides the fuller
-entries. The current posts are curated from Plane activity for October
-18–31, 2026, with activity dates and links to their source work items (PMGT-16 and
-PMGT-5). Edit the content in `app/data/project-updates.ts`.
+Use Node.js **24.13 or newer**.
 
-The feed renders directly from that file without credentials, n8n, or a database.
-Automated publishing is not active in this branch. The existing API route remains
-available for the future integration.
-
-## Run locally
-
-```bash
-npm install
+```sh
+npm ci
+cp .env.example .env.local
+npm run db:init
+npm run admin:create -- yourname
 npm run dev
 ```
 
-## Project updates webhook
+On PowerShell, `Copy-Item .env.example .env.local` also works. Administrator creation prompts for a hidden password. Open `/admin/login` to manage posts.
 
-The `/api/updates` route serves curated local entries until the n8n workflow is configured. Set `N8N_UPDATES_WEBHOOK_URL` in the deployment environment (server-side only). The webhook should respond with JSON shaped like:
+## Project updates
 
-```json
-{
-  "updates": [
-    {
-      "date": "2026-10-27",
-      "title": "Concept review",
-      "category": "Design",
-      "summary": "A concise update for the project blog.",
-      "image": "concept",
-      "href": "https://example.com/project-ticket"
-    }
-  ]
-}
+The Overview shows two short summaries and Updates lists the full project log. Both read new published posts from `GET /api/updates`. New posts have permanent `/updates/POST_ID` URLs. The two original October entries remain in the feed as a curated archive.
+
+Posts, original generations, revisions, evidence, and administrator accounts persist in SQLite. There are no placeholder posts or default passwords. Retries never overwrite an existing reporting period or a team's edits.
+
+See **[n8n workflow and local testing](docs/n8n.md)** for the importable workflows, a credential-free fixture, and the production handoff. See **[backend setup and operations](docs/backend.md)** for the publishing API, administrator accounts, server configuration, and backups.
+
+## Deployment
+
+Run this as a Next.js Node server, not an exported static site. Store the live database and environment secrets outside the directory replaced by deployments. Configure `DATABASE_PATH`, `APP_ORIGIN`, and `UPDATES_INGEST_TOKEN` on the server; keep runtime files and secrets out of Git.
+
+```sh
+npm ci
+npm run db:init
+npm run build
+npm start
 ```
 
-The API route falls back to local entries if the webhook is absent or unavailable. The current website feed uses the curated project-log file described above. Keep integrations read-only and do not place webhook secrets in client-side environment variables.
+The `dev` and `build` scripts use Webpack for compatibility with the reported Windows native-binding issue.
 
-## Content editing
+## Checks
 
-Project descriptions, team roles, design alternatives, engineering targets, planning milestones, BOM rows, and curated update entries are in `app/page.tsx` and `app/data/project-updates.ts`. Verify engineering targets, budget values, milestones, and update dates with the team before publishing them as current.
+```sh
+npm run check
+npm test
+npm run build
+npm run test:integration
+```
 
-## Bundler
-
-The `dev` and `build` scripts use Next.js Webpack mode for compatibility with Windows environments where Turbopack native bindings are unavailable.
+Integration checks start an isolated production server with a temporary database and generated test credentials. They do not publish to the live website or use real credentials.

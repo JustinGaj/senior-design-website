@@ -1,0 +1,96 @@
+{
+  "name": "Eagle Eye · Local publishing smoke test",
+  "nodes": [
+    {
+      "id": "819caddb-371a-46e0-b617-71df897b9297",
+      "name": "Manual preview",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "fd01424e-084d-4d51-84cb-2faafbd994e0",
+      "name": "Fixture post",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"periodStart\": \"2026-11-01\",\n  \"periodEnd\": \"2026-11-15\",\n  \"title\": \"Integration test update\",\n  \"summary\": \"A recorded test task moved to Done.\",\n  \"body\": \"Public body.\\n\\n<script>alert('not executed')</script>\",\n  \"category\": \"Engineering\",\n  \"image\": \"engineering\",\n  \"activities\": [\n    {\n      \"id\": \"private-activity-id\",\n      \"workItemId\": \"EE-TEST\",\n      \"createdAt\": \"2026-11-08T15:00:00Z\",\n      \"field\": \"state\",\n      \"oldValue\": \"In progress\",\n      \"newValue\": \"Done\",\n      \"comment\": \"Private supporting evidence\"\n    }\n  ]\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "88768b10-0b75-46bc-8702-cd0f3703064b",
+      "name": "Publish to Eagle Eye",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "method": "POST",
+        "url": "http://localhost:3000/api/updates",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json }}",
+        "options": {
+          "timeout": 30000,
+          "response": {
+            "response": {
+              "responseFormat": "json",
+              "fullResponse": true
+            }
+          },
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          }
+        }
+      },
+      "notes": "Use the token from your local .env.local. This fixture is only for a disposable local database.",
+      "notesInFlow": false
+    }
+  ],
+  "connections": {
+    "Manual preview": {
+      "main": [
+        [
+          {
+            "node": "Fixture post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fixture post": {
+      "main": [
+        [
+          {
+            "node": "Publish to Eagle Eye",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": []
+}

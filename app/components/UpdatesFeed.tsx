@@ -1,10 +1,33 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { projectUpdates } from "../data/project-updates";
+
+type PublishedUpdate = Omit<(typeof projectUpdates)[number], "paragraphs"> & {
+  url: string;
+};
 
 export function UpdatesFeed({ limit }: { limit?: number } = {}) {
   const isPreview = limit !== undefined;
-  const visibleUpdates = isPreview
-    ? projectUpdates.slice(0, limit)
-    : projectUpdates;
+  const [published, setPublished] = useState<PublishedUpdate[]>([]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("/api/updates", { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("Unable to load project updates");
+        return response.json() as Promise<{ updates: PublishedUpdate[] }>;
+      })
+      .then(({ updates }) => setPublished(updates))
+      .catch(() => {
+        // Keep the archived team updates visible if the live feed is unavailable.
+      });
+    return () => controller.abort();
+  }, []);
+
+  const updates = [...published, ...projectUpdates];
+  const visibleUpdates = isPreview ? updates.slice(0, limit) : updates;
 
   return (
     <section id="updates" className="dark-section updates-section">
@@ -51,14 +74,14 @@ export function UpdatesFeed({ limit }: { limit?: number } = {}) {
                 </small>
                 <h3>{update.title}</h3>
                 <p>{update.summary}</p>
-                {!isPreview && (
+                {!isPreview && "url" in update && (
+                  <Link href={update.url}>Read update ↗</Link>
+                )}
+                {!isPreview && "paragraphs" in update && (
                   <div className="update-detail">
                     {update.paragraphs.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
-                    <a href={update.href} target="_blank" rel="noreferrer">
-                      View in Plane ↗
-                    </a>
                   </div>
                 )}
               </div>
@@ -66,8 +89,7 @@ export function UpdatesFeed({ limit }: { limit?: number } = {}) {
           ))}
         </div>
         <div className="feed-note">
-          Updates from the project team <span>·</span> Activity recorded in
-          Plane
+          Updates from the project team
         </div>
         {isPreview && (
           <a className="button ghost updates-more" href="#updates">
